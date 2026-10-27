@@ -21,10 +21,33 @@
     <a href="explorar.html">Explorar</a>
     <a href="historia.html" class="active">Historia</a>
   </nav>
-  <div class="nav-actions">
-    <a href="login.html"><button class="btn">Iniciar sesión</button></a>
-    <a href="registro.html"><button class="btn btn-primary">Registrarse</button></a>
+
+  
+<div class="nav-actions" id="authActions">
+  <!-- Botones visibles cuando no hay una sesión iniciada -->
+  <div id="authLinks">
+    <a href="/login.html" class="btn">Iniciar sesión</a>
+    <a href="/registro.html" class="btn btn-primary">Registrarse</a>
   </div>
+  <!-- Imagen oculta hasta comprobar que hay una sesión -->
+  <button type="button" id="botonUsuario" class="boton-usuario" aria-label="Abrir perfil" aria-expanded="false" hidden>
+    <img src="/imagenes/logos/usuario.PNG" alt="Usuario">
+  </button>
+  <!-- Panel del usuario, oculto inicialmente -->
+  <div id="panelUsuario" class="panel-usuario" hidden>
+    <h3>Mi perfil</h3>
+    <p class="etiqueta-perfil">Correo electrónico</p>
+    <p id="correoUsuario" class="correo-usuario"></p>
+    <form id="formPerfil">
+      <label for="nombreUsuario">Nombre de usuario</label>
+      <input type="text" id="nombreUsuario" name="nombre_usuario" placeholder="Ingresá tu nombre" minlength="2" maxlength="30" required>
+      <button type="submit" class="btn btn-primary">Guardar nombre</button>
+      <p id="mensajePerfil" aria-live="polite"></p>
+    </form>
+    <button type="button" id="cerrarSesion" class="btn-cerrar-sesion">Cerrar sesión</button>
+  </div>
+</div>
+
 </header>
 
 <main>
@@ -43,7 +66,7 @@
     </div>
     <button class="timeline-dot" data-audio="canciones/la_balsa.mp3" aria-label="Reproducir canción de La Balsa"></button>
     <div class="timeline-media">
-      <img src="imagenes/historia/la_balsa.jpeg" alt="La Balsa">
+      <img src="imagenes/historia/la_balsa.jpg" alt="La Balsa">
     </div>
   </article>
 
@@ -69,7 +92,7 @@
     </div>
     <button class="timeline-dot" data-audio="canciones/seru_giran.mp3" aria-label="Reproducir canción de Serú Girán"></button>
     <div class="timeline-media">
-      <img src="imagenes/historia/seru_giran.avif" alt="Serú Girán">
+      <img src="imagenes/historia/seru giran.jpg" alt="Serú Girán">
     </div>
   </article>
 
@@ -108,7 +131,7 @@
     </div>
     <button class="timeline-dot" data-audio="canciones/soda_stereo.mp3" aria-label="Reproducir canción de Soda Stereo"></button>
     <div class="timeline-media">
-      <img src="imagenes/historia/soda_stereo.jpeg" alt="Soda Stereo">
+      <img src="imagenes/historia/soda_stereo.jpg" alt="Soda Stereo">
     </div>
   </article>
 
@@ -134,7 +157,7 @@
     </div>
     <button class="timeline-dot" data-audio="canciones/prodan.mp3" aria-label="Reproducir canción de Luca Prodan"></button>
     <div class="timeline-media">
-      <img src="imagenes/historia/prodan.webp" alt="Luca Prodan">
+      <img src="imagenes/historia/prodan.jpg" alt="Luca Prodan">
     </div>
   </article>
 
@@ -186,7 +209,7 @@
     </div>
     <button class="timeline-dot" data-audio="canciones/separacion.mp3" aria-label="Reproducir canción de separación de Soda Stereo"></button>
     <div class="timeline-media">
-      <img src="imagenes/historia/separacion.jpeg" alt="Separación de Soda Stereo">
+      <img src="imagenes/historia/separacion.jpg" alt="Separación de Soda Stereo">
     </div>
   </article>
 
@@ -225,7 +248,7 @@
     </div>
     <button class="timeline-dot" data-audio="canciones/spinetta.mp3" aria-label="Reproducir canción de Spinetta"></button>
     <div class="timeline-media">
-      <img src="imagenes/historia/spinetta.jpeg" alt="Luis Alberto Spinetta">
+      <img src="imagenes/historia/spinetta.jpg" alt="Luis Alberto Spinetta">
     </div>
   </article>
 
@@ -251,7 +274,7 @@
     </div>
     <button class="timeline-dot" data-audio="canciones/airbag.mp3" aria-label="Reproducir canción de bandas actuales"></button>
     <div class="timeline-media">
-      <img src="imagenes/historia/airbag.jpeg" alt="Bandas actuales del rock nacional">
+      <img src="imagenes/historia/airbag.jpg" alt="Bandas actuales del rock nacional">
     </div>
   </article>
 

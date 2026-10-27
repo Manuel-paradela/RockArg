@@ -10,6 +10,7 @@
 
 <body>
 
+<!--Barra de navegacion-->
 <header class="topbar">
   <div class="brand">
     <img src="imagenes/logos/isotipo_2.png" alt="RockArg">
@@ -22,38 +23,32 @@
     <a href="historia.html">Historia</a>
   </nav>
 
+
 <div class="nav-actions" id="authActions">
+  <!-- Botones visibles cuando no hay una sesión iniciada -->
   <div id="authLinks">
-    <a href="/registro.html" class="btn btn-primary">Registrarse</a>
     <a href="/login.html" class="btn">Iniciar sesión</a>
+    <a href="/registro.html" class="btn btn-primary">Registrarse</a>
   </div>
-
-  <button type="button" id="botonUsuario" class="user-icon-button"
-    aria-label="Abrir perfil" aria-expanded="false" hidden>
-    <img src="/imagenes/logos/usuario.png" alt="">
+  <!-- Imagen oculta hasta comprobar que hay una sesión -->
+  <button type="button" id="botonUsuario" class="boton-usuario" aria-label="Abrir perfil" aria-expanded="false" hidden>
+    <img src="/imagenes/logos/usuario.PNG" alt="Usuario">
   </button>
-
-  <div id="panelUsuario" class="user-menu" hidden>
+  <!-- Panel del usuario, oculto inicialmente -->
+  <div id="panelUsuario" class="panel-usuario" hidden>
     <h3>Mi perfil</h3>
-
-    <p class="user-email-label">Correo electrónico</p>
-    <p id="correoUsuario" class="user-email"></p>
-
+    <p class="etiqueta-perfil">Correo electrónico</p>
+    <p id="correoUsuario" class="correo-usuario"></p>
     <form id="formPerfil">
       <label for="nombreUsuario">Nombre de usuario</label>
-      <input type="text" id="nombreUsuario" name="nombre_usuario"
-        placeholder="¿Cómo querés que te llamemos?"
-        minlength="2" maxlength="30" required>
-
+      <input type="text" id="nombreUsuario" name="nombre_usuario" placeholder="Ingresá tu nombre" minlength="2" maxlength="30" required>
       <button type="submit" class="btn btn-primary">Guardar nombre</button>
       <p id="mensajePerfil" aria-live="polite"></p>
     </form>
-
-    <button type="button" id="cerrarSesion" class="btn-logout">
-      Cerrar sesión
-    </button>
+    <button type="button" id="cerrarSesion" class="btn-cerrar-sesion">Cerrar sesión</button>
   </div>
 </div>
+
 </header>
 
 <main>

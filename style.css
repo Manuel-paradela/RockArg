@@ -1080,3 +1080,120 @@ footer .brand{color:var(--cream);}
     right: -5px;
   }
 }
+
+/* Contenedor de los botones y el perfil */
+.nav-actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+#authLinks {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+/* Ocultar elementos cuando tienen el atributo hidden */
+[hidden] {
+  display: none !important;
+}
+/* Botón con la imagen del usuario */
+.boton-usuario {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid #5eaadb;
+  border-radius: 50%;
+  background: #171717;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.boton-usuario img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.boton-usuario:hover {
+  border-color: #ffffff;
+}
+/* Panel desplegable del perfil */
+.panel-usuario {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 1000;
+  width: 280px;
+  padding: 20px;
+  border: 1px solid #5eaadb;
+  border-radius: 12px;
+  background: #181818;
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+.panel-usuario h3 {
+  margin: 0 0 18px;
+  color: #5eaadb;
+}
+.etiqueta-perfil {
+  margin-bottom: 4px;
+  color: #aaaaaa;
+  font-size: 13px;
+}
+.correo-usuario {
+  margin-top: 0;
+  margin-bottom: 20px;
+  overflow-wrap: anywhere;
+}
+.panel-usuario form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.panel-usuario label {
+  font-size: 14px;
+}
+.panel-usuario input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #444444;
+  border-radius: 6px;
+  background: #252525;
+  color: #ffffff;
+}
+.panel-usuario input:focus {
+  outline: 1px solid #5eaadb;
+  border-color: #5eaadb;
+}
+.panel-usuario form .btn {
+  width: 100%;
+  cursor: pointer;
+}
+#mensajePerfil {
+  margin: 0;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.btn-cerrar-sesion {
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px;
+  border: 1px solid #555555;
+  border-radius: 6px;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+}
+.btn-cerrar-sesion:hover {
+  border-color: #5eaadb;
+  background: #252525;
+}
+@media (max-width: 600px) {
+  .panel-usuario {
+    width: min(280px, calc(100vw - 40px));
+  }
+}

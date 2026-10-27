@@ -22,10 +22,33 @@
     <a href="historia.html">Historia</a>
   </nav>
 
-  <div class="nav-actions">
-    <a href="login.html"><button class="btn">Iniciar sesión</button></a>
-    <a href="registro.html"><button class="btn btn-primary">Registrarse</button></a>
+
+<div class="nav-actions" id="authActions">
+  <!-- Botones visibles cuando no hay una sesión iniciada -->
+  <div id="authLinks">
+    <a href="/login.html" class="btn">Iniciar sesión</a>
+    <a href="/registro.html" class="btn btn-primary">Registrarse</a>
   </div>
+  <!-- Imagen oculta hasta comprobar que hay una sesión -->
+  <button type="button" id="botonUsuario" class="boton-usuario" aria-label="Abrir perfil" aria-expanded="false" hidden>
+    <img src="/imagenes/logos/usuario.PNG" alt="Usuario">
+  </button>
+  <!-- Panel del usuario, oculto inicialmente -->
+  <div id="panelUsuario" class="panel-usuario" hidden>
+    <h3>Mi perfil</h3>
+    <p class="etiqueta-perfil">Correo electrónico</p>
+    <p id="correoUsuario" class="correo-usuario"></p>
+    <form id="formPerfil">
+      <label for="nombreUsuario">Nombre de usuario</label>
+      <input type="text" id="nombreUsuario" name="nombre_usuario" placeholder="Ingresá tu nombre" minlength="2" maxlength="30" required>
+      <button type="submit" class="btn btn-primary">Guardar nombre</button>
+      <p id="mensajePerfil" aria-live="polite"></p>
+    </form>
+    <button type="button" id="cerrarSesion" class="btn-cerrar-sesion">Cerrar sesión</button>
+  </div>
+</div>
+
+
 </header>
 
 <main>

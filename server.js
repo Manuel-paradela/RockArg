@@ -81,21 +81,11 @@ app.use(
 app.get("/api/bandas", (req, res) => {
   try {
 
-    const resultado = db.prepare(`
-      SELECT *
-      FROM "bandas/solista"
-    `).all();
-
+    const resultado = db.prepare(`SELECT * FROM "bandas/solista"`).all();
     res.json(resultado);
-
   } catch(error) {
-
     console.error(error);
-
-    res.status(500).json({
-      error: "Error al obtener las bandas"
-    });
-
+    res.status(500).json({error: "Error al obtener las bandas"});
   }
 });
 
@@ -107,18 +97,8 @@ app.get("/api/bandas", (req, res) => {
 app.get("/api/discos", (req, res) => {
   try {
 
-    const resultado = db.prepare(`
-      SELECT
-        discos.ID,
-        discos.Nombre_Album,
-        discos.año,
-        discos.imagenes,
-        "bandas/solista".nombre AS banda
-
-      FROM discos
-
-      JOIN "bandas/solista"
-        ON discos."banda/artista" = "bandas/solista".ID
+    const resultado = db.prepare(`SELECTdiscos.ID,discos.Nombre_Album,discos.año,discos.imagenes,
+      "bandas/solista".nombre AS bandaFROM discosJOIN "bandas/solista" ON discos."banda/artista" = "bandas/solista".ID
     `).all();
 
     res.json(resultado);
@@ -229,6 +209,8 @@ app.get("/api/buscar", (req, res) => {
 
 
  // FUNCIONES PARA PROTEGER LAS CONTRASEÑAS
+//Estoy usando hash, camiba la ocntraseña en una forma de texto irrebersilbe y encriptado, en la bdd no aparece
+// la contraseña tal como se pone en la bdd, sino encriptada, la verificacion es igual de todas maneras
 function crearHash(contraseña) {
   const salt = crypto.randomBytes(16).toString("hex");
   const hash = crypto.scryptSync(contraseña, salt, 64).toString("hex");
@@ -371,32 +353,77 @@ app.post("/api/login", (req, res) => {
   }
 });
 
-// COMPROBAR SI HAY UNA SESIÓN ACTIVA
-app.get("/api/sesion", (req, res) => {
-  const token = obtenerToken(req);
-  const sesion = token ? sesiones.get(token) : null;
-
-  if(!sesion || sesion.expira < Date.now()) {
-    if(token) sesiones.delete(token);
-
-    res.setHeader(
-      "Set-Cookie",
-      "rockarg_session=; HttpOnly; SameSite=Lax; Path=/; Max-Age=0"
-    );
-
-    return res.json({
-      logueado: false,
-      usuario: null
-    });
+function obtenerToken(req) {
+  const cookies = (req.headers.cookie || "").split(";");
+  const cookie = cookies.find(parte =>
+    parte.trim().startsWith("rockarg_session=")
+  );
+  if (!cookie) {
+    return null;
   }
+  return decodeURIComponent(
+    cookie.trim().substring("rockarg_session=".length)
+  );
+}
 
+function obtenerSesion(req) {
+  const token = obtenerToken(req);
+  if (!token) {
+    return null;
+  }
+  const sesion = sesiones.get(token);
+  if (!sesion) {
+    return null;
+  }
+  if (sesion.expiresAt <= Date.now()) {
+    sesiones.delete(token);
+    return null;
+  }
+  return sesion;
+}
+
+/* Consultar la sesión actual */
+app.get("/api/sesion", (req, res) => {
+  const sesion = obtenerSesion(req);
+  if (!sesion) {
+    return res.json({logueado: false});
+  }
+  const usuario = db.prepare(
+    "SELECT mail, nombre_usuario FROM Usuarios WHERE ID = ?"
+  ).get(sesion.userId);
+  if (!usuario) {
+    return res.status(401).json({logueado: false});
+  }
   res.json({
     logueado: true,
-    usuario: {
-      mail: sesion.mail
-    }
+    mail: usuario.mail,
+    nombre_usuario: usuario.nombre_usuario || ""
   });
 });
+/* Guardar el nombre de usuario */
+app.post("/api/perfil", (req, res) => {
+  const sesion = obtenerSesion(req);
+  if (!sesion) {
+    return res.status(401).json({mensaje: "Iniciá sesión nuevamente."});
+  }
+  const nombre = String(req.body.nombre_usuario || "").trim();
+  if (nombre.length < 2 || nombre.length > 30) {
+    return res.status(400).json({
+      mensaje: "El nombre debe tener entre 2 y 30 caracteres."
+    });
+  }
+  const resultado = db.prepare(
+    "UPDATE Usuarios SET nombre_usuario = ? WHERE ID = ?"
+  ).run(nombre, sesion.userId);
+  if (resultado.changes === 0) {
+    return res.status(404).json({mensaje: "No se encontró la cuenta."});
+  }
+  res.json({
+    mensaje: "Nombre de usuario guardado correctamente.",
+    nombre_usuario: nombre
+  });
+});
+
 
 // CERRAR SESIÓN
 app.post("/api/logout", (req, res) => {
@@ -421,11 +448,9 @@ app.post("/api/logout", (req, res) => {
 // ======================================================
 
 app.listen(PORT, () => {
-
   console.log("");
   console.log("================================");
   console.log("API CORRIENDO");
   console.log("================================");
   console.log(`http://localhost:${PORT}`);
-
-});
+}); 

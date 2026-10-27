@@ -62,99 +62,96 @@ if (formLogin) {
   });
 }
 
-// PERFIL Y ESTADO DE SESIÓN
-const authLinks = document.getElementById("authLinks");
-const botonUsuario = document.getElementById("botonUsuario");
-const panelUsuario = document.getElementById("panelUsuario");
-const correoUsuario = document.getElementById("correoUsuario");
-const formPerfil = document.getElementById("formPerfil");
-const nombreUsuario = document.getElementById("nombreUsuario");
-const mensajePerfil = document.getElementById("mensajePerfil");
-const cerrarSesion = document.getElementById("cerrarSesion");
 
-async function cargarSesion() {
-  if (!authLinks || !botonUsuario) return;
-
-  try {
-    const respuesta = await fetch("/api/sesion");
-    const datos = await respuesta.json();
-
-    if (datos.autenticado) {
-      authLinks.hidden = true;
-      botonUsuario.hidden = false;
-      correoUsuario.textContent = datos.usuario.mail;
-      nombreUsuario.value = datos.usuario.nombre_usuario || "";
-    } else {
+document.addEventListener("DOMContentLoaded", () => {
+  const authLinks = document.getElementById("authLinks");
+  const botonUsuario = document.getElementById("botonUsuario");
+  const panelUsuario = document.getElementById("panelUsuario");
+  const correoUsuario = document.getElementById("correoUsuario");
+  const nombreUsuario = document.getElementById("nombreUsuario");
+  const formPerfil = document.getElementById("formPerfil");
+  const mensajePerfil = document.getElementById("mensajePerfil");
+  const cerrarSesion = document.getElementById("cerrarSesion");
+  if (!authLinks || !botonUsuario || !panelUsuario) return;
+  // Comprueba si hay una sesión iniciada
+  async function cargarSesion() {
+    try {
+      const respuesta = await fetch("/api/sesion");
+      const datos = await respuesta.json();
+      const iniciada = respuesta.ok && datos.logueado === true;
+      authLinks.hidden = iniciada;
+      botonUsuario.hidden = !iniciada;
+      if (iniciada) {
+        correoUsuario.textContent = datos.mail || "";
+        if (nombreUsuario) {
+          nombreUsuario.value = datos.nombre_usuario || "";
+        }
+      } else {
+        panelUsuario.hidden = true;
+        botonUsuario.setAttribute("aria-expanded", "false");
+      }
+    } catch (error) {
+      console.error("Error al comprobar la sesión:", error);
       authLinks.hidden = false;
       botonUsuario.hidden = true;
-      panelUsuario.hidden = true;
     }
-  } catch (error) {
-    console.error("Error al consultar la sesión:", error);
   }
-}
-
-// Abrir y cerrar el panel
-if (botonUsuario && panelUsuario) {
+  // Abre y cierra el panel al presionar la imagen
   botonUsuario.addEventListener("click", () => {
     panelUsuario.hidden = !panelUsuario.hidden;
-    botonUsuario.setAttribute(
-      "aria-expanded",
-      String(!panelUsuario.hidden)
-    );
+    botonUsuario.setAttribute("aria-expanded", String(!panelUsuario.hidden));
   });
-
+  // Cierra el panel al hacer clic fuera de él
   document.addEventListener("click", (event) => {
-    const acciones = document.getElementById("authActions");
-
-    if (acciones && !acciones.contains(event.target)) {
+    if (!panelUsuario.contains(event.target) && !botonUsuario.contains(event.target)) {
       panelUsuario.hidden = true;
       botonUsuario.setAttribute("aria-expanded", "false");
     }
   });
-}
-
-// Guardar nombre de usuario
-if (formPerfil) {
-  formPerfil.addEventListener("submit", async (event) => {
-    event.preventDefault();
-
-    mensajePerfil.textContent = "Guardando...";
-
-    try {
-      const respuesta = await fetch("/api/perfil", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          nombre_usuario: nombreUsuario.value
-        })
-      });
-
-      const datos = await respuesta.json();
-      mensajePerfil.textContent = datos.mensaje;
-
-      if (respuesta.ok) {
-        nombreUsuario.value = datos.usuario.nombre_usuario;
+  // Guarda el nombre de usuario en la base de datos
+  if (formPerfil) {
+    formPerfil.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      mensajePerfil.textContent = "Guardando nombre...";
+      try {
+        const respuesta = await fetch("/api/perfil", {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({
+            nombre_usuario: nombreUsuario.value.trim()
+          })
+        });
+        const datos = await respuesta.json();
+        mensajePerfil.textContent = datos.mensaje || "No se pudo guardar el nombre.";
+        if (respuesta.ok) {
+          nombreUsuario.value = datos.nombre_usuario || nombreUsuario.value.trim();
+        }
+        if (respuesta.status === 401) {
+          await cargarSesion();
+        }
+      } catch (error) {
+        console.error(error);
+        mensajePerfil.textContent = "No se pudo conectar con el servidor.";
       }
-    } catch (error) {
-      console.error(error);
-      mensajePerfil.textContent = "No se pudo guardar el nombre.";
-    }
-  });
-}
-
-// Cerrar sesión
-if (cerrarSesion) {
-  cerrarSesion.addEventListener("click", async () => {
-    try {
-      await fetch("/api/logout", { method: "POST" });
-      window.location.href = "/index.html";
-    } catch (error) {
-      console.error(error);
-      mensajePerfil.textContent = "No se pudo cerrar la sesión.";
-    }
-  });
-}
-
-// Comprobar sesión al cargar la página
-cargarSesion();
+    });
+  }
+  // Cierra la sesión
+  if (cerrarSesion) {
+    cerrarSesion.addEventListener("click", async () => {
+      try {
+        const respuesta = await fetch("/api/logout", {
+          method: "POST"
+        });
+        if (respuesta.ok) {
+          window.location.href = "/index.html";
+        } else {
+          mensajePerfil.textContent = "No se pudo cerrar la sesión.";
+        }
+      } catch (error) {
+        console.error(error);
+        mensajePerfil.textContent = "No se pudo conectar con el servidor.";
+      }
+    });
+  }
+  cargarSesion();
+});
