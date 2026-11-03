@@ -1,0 +1,219 @@
+Prompts del proyecto RockArg
+
+29 de julio de 2026. Fecha inicial indicada por el autor; consulta reconstruida.
+
+Tengo que desarrollar una página para el proyecto final de Informática y Diseño. Quiero una biblioteca de rock nacional argentino, parecida en su organización a una plataforma musical. Ayudame a evaluar nombres como RockArg, Rock Argentino, Raíz Rock, Archivo Nacional, Pulso Argentino y Sonido Nacional. Para la identidad visual me interesan fondos negros o navy, celeste, crema y gris; podemos evaluar #15151b, #1f1f30, #5aa7e0 y #f4f1e9. Dame ideas de un logo simple, con hasta tres colores y algún elemento relacionado con música o auriculares. Primero quiero definir el concepto, no programar toda la página.
+
+Principios de agosto de 2026. Fecha aproximada; resumen de Claude.
+
+Quiero organizar la idea de RockArg: una biblioteca de artistas, álbumes y canciones de rock nacional. ¿Qué conviene para reproducir los temas, usar archivos de audio disponibles para el proyecto o integrar YouTube? Compará los requisitos, las limitaciones y la dificultad de cada alternativa. Explicame qué partes necesitaría: página, reproductor, base de datos y servidor. Por ahora estoy evaluando YouTube, pero quiero entender las diferencias antes de conectarlo.
+
+Primera semana de agosto de 2026. Fecha aproximada; resumen de Claude.
+
+Explicame la diferencia entre YouTube Data API y YouTube IFrame Player API. Quiero entender cuál permite buscar información, cuál permite reproducir videos y en qué casos se necesita una API key. Mi idea es tener controles propios de reproducción en RockArg. Revisá también qué restricciones tiene la integración y qué depende de la disponibilidad de cada video.
+
+Primera semana de agosto de 2026. Fecha aproximada; resumen de Claude.
+
+Por ahora no puedo completar la apertura de una cuenta de Google Cloud. ¿Puedo trabajar con los identificadores de los videos sin usar una clave de la Data API? No quiero copiar los IDs uno por uno si estoy cargando un álbum completo. Mostrame una alternativa para obtener el listado de una playlist desde la terminal y explicame cómo relacionarlo con los títulos de las canciones.
+
+Primera semana de agosto de 2026. Fecha aproximada; resumen de Claude.
+
+Estoy probando yt-dlp con una playlist y me aparecen errores. Te paso la salida de la terminal para revisar qué está pasando. Quiero obtener los títulos e IDs de las canciones del álbum debut de Soda Stereo, sin descargar los videos. Después ayudame con un script de Python que lea esa salida y la convierta en una lista que pueda usar para completar mi base de datos.
+
+Semana del 10 al 16 de agosto de 2026. Aproximadamente el 13 de agosto; resumen de Claude.
+
+Estoy armando la base en DB Browser for SQLite y empecé por los álbumes y canciones de Soda Stereo. Necesito agregar una columna URLS y completar los identificadores o enlaces que obtuve. Explicame cómo hacer ALTER TABLE y UPDATE sin borrar los registros existentes. Los cambios deben usar los nombres reales de mis tablas y columnas, que te muestro en las capturas.
+
+Semana del 10 al 16 de agosto de 2026. Fecha aproximada; resumen de Claude.
+
+Al principio estoy separando información por banda, pero quiero saber si conviene tener una sola tabla de artistas, otra de discos y otra de canciones. Explicame las claves primarias, las claves foráneas y cómo se relacionaría una canción con su álbum y después con la banda. También necesito entender cómo consultar esa base desde una página: primero evaluemos Flask y después Node.js con Express. Dibujá o explicá la arquitectura completa, separando lo que hace el navegador de lo que hace el servidor.
+
+Primera parte del chat compartido de ChatGPT. Fecha no visible, anterior al separador del 19 de agosto de 2026.
+
+Te paso capturas de las tablas para que coincidan todos los datos. Generame el contenido de las canciones con su ID, álbum y URL. Los IDs deben empezar en 1 y continuar en cada canción. Usá las capturas como referencia y no cambies los nombres de las columnas ni los identificadores de discos. Si falta un dato que no se puede deducir, indicamelo en lugar de inventarlo.
+
+19 de agosto de 2026. Fecha visible en el chat de ChatGPT.
+
+La última canción de Soda Stereo termina en el ID 87. Ahora necesito cargar las canciones de los diez álbumes de Los Redondos. Adjunto una captura de la tabla de álbumes para que uses sus IDs reales. Generame las consultas SQL con la numeración continuada desde el último tema de Soda y la relación de cada canción con su disco. No vuelvas a insertar las canciones anteriores ni reinicies los identificadores.
+
+Semana del 17 al 23 de agosto de 2026. Aproximadamente el 20 de agosto; resumen de Claude.
+
+Ya tengo una paleta de marca con negro o navy, celeste, crema y gris. Te adjunto el isotipo, el logotipo y la fuente Bebas Neue. Quiero un primer diseño de RockArg con barra de navegación, accesos de login y registro, grilla de álbumes y un reproductor con una carátula grande, tomando como referencia una imagen de 640 por 640. Respetá la identidad que preparé y diferenciá títulos, subtítulos y cuerpo de texto.
+
+Semana del 17 al 23 de agosto de 2026. Fecha aproximada; resumen de Claude.
+
+A partir del diseño y del HTML básico que te paso, armame un CSS con la identidad de RockArg. El HTML todavía tiene menos contenido que la versión final: navegación, presentación, imágenes, algunos álbumes y pie de página. Después quiero convertir el diseño en páginas reales de Inicio, Explorar e Historia, además del login y registro. Explicame cómo vincular las hojas de estilo y qué clases debo conservar para que se apliquen bien.
+
+Segunda mitad de agosto de 2026. Consultas de ChatGPT entre separadores del 19 y el 26 de agosto; sin fecha individual visible.
+
+Necesito completar las URLs de las canciones que acabamos de cargar. Usá solamente los temas presentes en el comando anterior y armá los UPDATE para mi tabla. Después quiero agregar la columna imagenes a los discos usando los nombres exactos de los archivos que aparecen en la captura. La tabla se llama discos y los campos de todas_las_canciones son ID, cancion, album y URLS. No cambies la estructura por usar otros nombres de ejemplo.
+
+Semana del 24 al 30 de agosto de 2026. Aproximadamente el 26 de agosto; resumen de Claude.
+
+Mi base ya se está organizando en bandas/solista, discos y todas_las_canciones. Quiero completar el nombre y la imagen de los artistas, el nombre, año e imagen de cada disco y sus relaciones con las canciones. Te paso capturas de las carpetas para que los nombres de los archivos coincidan, incluidos espacios y extensiones. Revisá las claves y explicame cómo usar JOIN para obtener canción, álbum y banda en una misma consulta.
+
+Semana del 24 al 30 de agosto de 2026. Fecha aproximada; resumen de Claude.
+
+Las imágenes quedaron guardadas con la ruta completa de la red de la escuela. Quiero reemplazar ese prefijo para que la base conserve referencias que puedan funcionar también en otra computadora. Explicame cómo usar REPLACE() en una consulta SQL y cómo comprobar primero qué valores se van a modificar. No quiero perder los nombres de archivo al limpiar las rutas.
+
+Semana del 24 al 30 de agosto de 2026. Fecha aproximada; resumen de Claude.
+
+Voy a usar Node.js y Express para conectar RockArg con SQLite. Necesito que me expliques cómo iniciar el proyecto, instalar dependencias y ejecutar server.js. Después armá las rutas /api/bandas, /api/discos, /api/canciones y /api/buscar usando mis tablas reales.
+
+Quiero que los discos incluyan el nombre del artista y que las canciones incluyan su álbum, imagen y banda. Explicame require, app.use, app.get, req, res y app.listen, y cómo se envían los resultados como JSON. La ruta de la base debe calcularse desde la carpeta del servidor y los archivos públicos deben poder abrirse desde el mismo servidor. Mostrame también cómo probar cada endpoint en el navegador y reconocer un error de consulta.
+
+Fines de agosto de 2026. Aclaración del autor sobre el uso de herramientas.
+
+Durante las primeras etapas trabajé con Claude y después incorporé ChatGPT por los límites de tokens que encontraba y porque algunas respuestas me resultaban más útiles para continuar. El cambio no fue una separación exacta entre meses: el chat compartido de ChatGPT ya contiene consultas fechadas el 19 de agosto. El resumen de Claude también abarca avances aproximados hasta septiembre, por lo que los registros de ambas herramientas se superponen. La valoración de las respuestas corresponde a mi experiencia personal.
+
+Semana del 31 de agosto al 6 de septiembre de 2026. Resumen de Claude.
+
+En la computadora de la escuela no tengo el mismo entorno que en mi casa. Node.js no está instalado, PowerShell bloquea algunos scripts y el proyecto está en una ruta de red. Te paso los errores que aparecen al abrir la carpeta desde CMD. Explicame cómo acceder con pushd o net use, cómo verificar node y npm y qué pasos tengo que repetir si el entorno de la sesión escolar se restablece. Diferenciá los problemas de instalación de los problemas del código.
+
+Semana del 31 de agosto al 6 de septiembre de 2026. Resumen de Claude.
+
+Las tablas tienen registros, pero la consulta con JOIN no devuelve canciones. Revisemos los tipos reales de discos.ID y todas_las_canciones.album usando typeof(). Si uno está guardado como texto y el otro como número, explicame cómo comprobar la comparación y usar CAST donde haga falta. Quiero entender por qué una consulta individual funciona y la consulta relacionada queda vacía, antes de reemplazar todo el servidor.
+
+2 de septiembre de 2026. Fecha visible en el chat de ChatGPT.
+
+Te adjunto las capturas con los nombres de las fotos de las bandas. Necesito un código SQL que complete la columna imagenes con el archivo correspondiente a cada artista. Después quiero agregar la columna duracion a las canciones y cargar los tiempos en segundos. Usá el listado de canciones y la estructura que adjunto; los datos que falten o no puedan verificarse deben quedar señalados para revisión.
+
+Primera semana de septiembre de 2026. Consultas de corrección; fuentes Claude y ChatGPT.
+
+El SQL me muestra un error y te adjunto la estructura real de la tabla. Revisá el nombre de los campos, la sintaxis y los valores antes de generar el comando completo otra vez. Quiero conservar los registros que ya cargué. Explicame cuál era el error y qué parte corregiste para poder repetirlo después con otros datos.
+
+Semana del 31 de agosto al 6 de septiembre de 2026. Frontend; resumen de Claude.
+
+Te paso el ZIP del proyecto con las páginas Inicio, Explorar, Historia, login y registro. Quiero integrar el isotipo real y las fotos de los artistas. En Inicio agregá una imagen circular que cambie de banda al cargar y tenga una animación de giro. Para Explorar quiero una grilla de bandas y una sección de álbumes. Las filas de canciones deben mostrar la portada y un botón de reproducción a la derecha. Revisá también qué canciones del Top 10 que estamos mostrando existen realmente en mi base; no presentes las que faltan como si ya estuvieran cargadas.
+
+Semana del 7 al 13 de septiembre de 2026. Aproximadamente el 10 de septiembre; resumen de Claude.
+
+Quiero conectar el frontend con la API que ya armamos. Explicame fetch(), async/await y cómo transformar una lista de resultados en tarjetas o filas usando map().join(). Las bandas y los álbumes de Explorar deben venir de la base y no quedar escritos uno por uno en el HTML. Mostrame cómo usar innerHTML y cómo indicar si todavía está cargando o si la petición falla.
+
+Semana del 7 al 13 de septiembre de 2026. Rutas de imágenes; resumen de Claude.
+
+Los datos aparecen, pero las imágenes no. Revisá las rutas que te paso: puede estar duplicado /imagenes/, las portadas están en files/imagenes/albumes y hay archivos con extensiones .jpg y .JPEG. Después de mover los HTML a files también aparecen errores ERR_FILE_NOT_FOUND en imágenes escritas a mano. Explicame desde dónde se resuelve cada ruta y qué debe publicar Express para que funcionen las imágenes desde el navegador.
+
+14 de septiembre de 2026. Fecha visible en el chat de ChatGPT.
+
+Adjunto el ZIP del proyecto. Quiero que los resultados de búsqueda aparezcan debajo de la barra, con el formato de filas de canciones que ya tiene mi función crearFilaCancion(). El buscador debe consultar los valores disponibles a través de la API y encontrar canciones por lo que se escribe, sin distinguir mayúsculas y minúsculas. Si hay dos temas con el mismo nombre, como una versión original y otra de MTV, deben aparecer ambos con su álbum y su portada correspondientes. Devolveme los archivos HTML, CSS y JavaScript necesarios, con comentarios que expliquen la lógica, sin borrar las partes que ya funcionan.
+
+17 de septiembre de 2026. Fecha visible en el chat de ChatGPT.
+
+Al presionar reproducir no funciona el enlace de YouTube. Te adjunto el error. Quiero que revises si el problema está en la URL, en el modo de abrir la página o en las restricciones del video. También quiero que el botón muestre Play.png y que cambie a Pausa.png cuando esté reproduciendo. Estoy probando con Live Server y te paso las capturas de los errores que aparecen, para que los analices sin asumir que todos tienen la misma causa.
+
+Nota sobre los códigos de error: el autor recordó los códigos 150 y 151 en consultas posteriores. Como los números no se pueden confirmar en el texto visible del enlace compartido, no se registran aquí como errores verificados en las capturas originales.
+
+Segunda mitad de septiembre de 2026. Consultas posteriores al 17 de septiembre; sin fecha individual visible en el chat compartido.
+
+Quiero que el panel del reproductor aparezca solamente después de presionar play en una canción de los resultados. Por ahora necesito que funcionen bien play y pausa, la duración y la barra para cambiar de posición. Te adjunto el HTML actual: partí de ese archivo y generá el JavaScript necesario. No quiero solamente ver el panel; también debe escucharse el audio y sus controles deben reflejar lo que realmente está haciendo.
+
+Segunda mitad de septiembre de 2026. Evolución de Historia; sin fecha individual visible en el chat compartido.
+
+Quiero conservar los hechos de mi línea del tiempo y agregar imágenes solamente en las secciones que te indiqué, sin borrar los demás hechos. Las imágenes tienen que mantener sus proporciones y no desbordarse. Te paso el HTML anterior y una captura de cómo se ven para que corrijas la distribución respetando el contenido existente.
+
+Segunda mitad de septiembre de 2026. Historia y archivos locales; sin fecha individual visible en el chat compartido.
+
+Te adjunto mi HTML y CSS actuales. Hice cambios propios y quiero que los respetes: eliminé algunos hechos y modifiqué estilos, así que no vuelvas a agregarlos. Necesito que centres los círculos de la línea del tiempo y que al presionar uno se reproduzca el archivo correspondiente desde files/canciones, sin consultar la API para esos audios.
+
+Usá la correspondencia de nombres que te indico para cada sección. Conservá los hechos que siguen presentes y ordená el HTML sin saltos de línea innecesarios. En el CSS explicá con comentarios las partes complejas, especialmente posicionamiento, columnas y centrado, pero no hace falta explicar cada color o margen sencillo.
+
+Fines de septiembre de 2026. Transición a audio local; sin fecha individual visible en el chat compartido.
+
+Quiero utilizar los archivos de audio locales en lugar de depender de los enlaces de YouTube para escuchar los temas. La carpeta se llama canciones y la columna de todas_las_canciones se llama archivos. Primero generame el SQL para asociar los archivos de la captura con las canciones correctas. Después adaptá el reproductor para leer ese campo y construir la ruta al MP3.
+
+También necesito recuperar el estilo y funcionamiento de los botones Artistas y Álbumes. En Inicio eliminé las secciones de álbumes favoritos y todas las canciones: no las vuelvas a agregar. Quiero que al buscar aparezcan los resultados y, al elegir un tema, su reproductor. Hacé el reproductor más pequeño, con la portada menos grande, y quitá la línea blanca que sobra junto al control de reproducción. Si modificás un archivo completo, conservá las demás decisiones que ya hice.
+
+1 de octubre de 2026. Fecha visible en el chat de ChatGPT.
+
+Primero quiero corregir el CSS antes de seguir con el audio. Los botones Artistas y Álbumes de explorar.html tienen las clases chips y chip, pero no se ven como deberían. Te paso ese fragmento para que me des los estilos o el cambio de HTML necesario. En las filas de canciones quitá la línea blanca de la derecha, alineá mejor el texto y poné el álbum y la banda en un gris más oscuro. No cambies todo el archivo si para esta corrección alcanza con un apartado.
+
+Después del 1 de octubre de 2026. Consultas SQL de audio; sin fecha individual visible en el chat compartido.
+
+Necesito completar archivos en la base usando los nombres reales de mis canciones. Te adjunto la base como guía. Algunos archivos tienen nombres abreviados: airbag corresponde a la canción que te indico, paez a El amor después del amor, cerati a Crimen, seru_giran a Seminare, spinetta a Bajan, la_era- a Qué ves e hijos a El viejo de arriba. Usá las asociaciones de mi mensaje y avisame si alguna no es clara. No relaciones una canción solo porque el archivo tenga el nombre de una banda.
+
+Semana del 5 al 11 de octubre de 2026. Ubicación aproximada para ordenar consultas sin fecha individual; chat de ChatGPT.
+
+No se escucha el audio ni cambia el botón de play a pausa. Te pego los HTML, JavaScript y server.js para revisar el recorrido completo. Comprobá si la ruta de canciones está declarada más de una vez, si la consulta que responde incluye archivos y si Express está publicando la carpeta correcta. Quiero una solución consistente entre base, servidor y navegador, no agregar otra ruta repetida que nunca llegue a ejecutarse.
+
+Explicame cómo usar un único objeto Audio, cómo cambiar su archivo al seleccionar una canción y cómo escuchar los eventos play, pause, loadedmetadata y timeupdate. La barra y el ícono deben actualizarse según el audio real y debe haber un mensaje o indicación cuando falte el archivo.
+
+Semana del 12 al 18 de octubre de 2026. Ubicación aproximada; registro y login del chat compartido, sin fecha individual visible.
+
+Quiero terminar de conectar los formularios de registro y login con la tabla Usuarios. Al enviar el formulario, mi mail y contraseña aparecen en la dirección del navegador y no se crea el registro. Revisá los IDs, el evento submit, preventDefault(), fetch y las rutas POST del servidor. Necesito que los datos se envíen al backend y que la página muestre la respuesta, no que se agreguen a la URL.
+
+Explicame la diferencia entre crear una cuenta e iniciar sesión, cómo se reconoce después al usuario y cómo se valida la información antes de guardarla. Conservá los nombres de campos de la versión que te adjunto para no mezclar el login por mail de esta etapa con cambios posteriores.
+
+Semana del 19 al 25 de octubre de 2026. Ubicación aproximada; menú de usuario del chat compartido, sin fecha absoluta visible.
+
+Ya quiero implementar la imagen usuario.PNG en todas las barras de navegación. Mientras no haya sesión, deben aparecer Iniciar sesión y Registrarse. Cuando el servidor confirme una sesión activa, esos botones deben ocultarse y aparecer la imagen del usuario.
+
+Al presionarla, abrí un panel con el mail de esta versión y un formulario para agregar o modificar nombre_usuario en Usuarios. Necesito HTML, CSS y JavaScript compatibles entre sí. El panel debe cerrarse al hacer clic afuera y tener una opción de cerrar sesión. La información debe guardarse en la cuenta identificada por la sesión, no solamente en un elemento del navegador. Te paso los errores y los archivos si el ícono no aparece o el guardado no funciona.
+
+Fines de octubre de 2026. Panel administrador; chat compartido, sin fecha absoluta visible.
+
+Quiero agregar un panel admin.html para gestionar canciones, bandas y álbumes. Debe tener un selector de entidad y tres acciones: Agregar en verde, Modificar en celeste y Borrar en rojo. Estas acciones deben cambiar directamente los registros de SQLite a través del servidor.
+
+Para canciones, el formulario debe pedir nombre, álbum, duración en segundos y archivo de audio opcional. El ID debe ser el siguiente al mayor ID existente. El álbum se selecciona por nombre, pero se guarda su identificador. Para álbumes, pedir nombre, año, banda e imagen de portada. Para bandas, trabajar con los datos que permite el formulario y explicar cómo se vinculan sus imágenes.
+
+No se debe agregar una canción a un álbum inexistente ni un álbum a una banda inexistente. Quiero que el servidor compruebe esas relaciones, valide los datos y devuelva errores claros. Para administrar, la cuenta debe existir en Usuarios y estar autorizada en Usuarios_admin. No alcanza con ocultar botones en el HTML: las rutas también tienen que verificar los permisos. Agregá la selección del registro para modificar o borrar y pedí confirmación antes del borrado.
+
+Fines de octubre de 2026. Sliders; chat compartido, sin fecha absoluta visible.
+
+Quiero que Explorar permita recorrer las bandas y los álbumes con flechas, en lugar de mostrar todas las tarjetas juntas. Conservá el diseño y las funciones del archivo que te mandé: agregá solamente la paginación necesaria. Después adaptá los botones para usar izquierda.png y derecha.png. Si una variante nueva rompe el funcionamiento, volvé a la primera implementación del slider que funcionaba y no reemplaces las demás partes del HTML.
+
+Fines de octubre de 2026. Responsive; chat compartido, sin fecha absoluta visible.
+
+¿El código es responsive? Necesito que se pueda seguir usando desde otras pantallas. No me refiero solamente al slider: revisá toda la página, incluidos la navegación, las listas, los formularios, el reproductor y la línea del tiempo. Explicame qué estilos habría que adaptar y mantené el aspecto de computadora.
+
+29 y 30 de octubre de 2026. Resumen de consultas de esta conversación sobre organización.
+
+Quiero modularizar el JavaScript del navegador y el código de Node.js para que sea más fácil encontrar cada responsabilidad. Revisá qué archivos tienen funciones diferentes aunque compartan nombre, evitá duplicaciones y actualizá los imports y las referencias al moverlos. Si una reorganización deja de cargar bien la página o la base, corregí las rutas y volvé a una distribución que funcione.
+
+La estructura pública que quiero conservar es files/public/html, files/public/css y files/public/js, con imágenes y canciones dentro de files, y server.js fuera de esa carpeta. Las consultas de SQLite deben seguir resolviéndose desde el backend.
+
+30 de octubre de 2026. Formularios y reproductor; consultas de esta conversación.
+
+Centrémonos en la presentación. Quiero que los formularios de login y registro estén centrados y tengan un diseño más limpio, con botones del mismo estilo que la página para enviar, cambiar entre pantallas y volver al inicio. Conservá los IDs y el funcionamiento de los formularios.
+
+Después mejorá el reproductor: portada centrada, una tarjeta más prolija, texto y controles bien distribuidos y una barra de progreso algo más gruesa, sin exagerar, con un área cómoda para presionar. Aplicalo en Inicio y Explorar sin cambiar la lógica de reproducción.
+
+30 y 31 de octubre de 2026. Diseño de favoritos; consultas de esta conversación.
+
+Antes de programar los me gusta, explicame qué alternativas de base de datos hay. Quiero saber si puedo guardar varios IDs de canciones dentro de un campo del usuario como una lista JSON. Para este proyecto voy a elegir esa estructura en Usuarios.me_gusta: al marcar se agrega el ID y al quitarlo se elimina. Necesito entender los controles que debe hacer el servidor para evitar repetidos o cambios en la cuenta equivocada.
+
+31 de octubre de 2026. Línea del tiempo; consulta de esta conversación.
+
+En Historia quiero reemplazar los círculos de audio por los íconos de play y pausa, manteniendo el tamaño de los controles anteriores. El ícono debe cambiar cuando el audio empiece realmente y volver a play al pausar o terminar. Cuando seleccione otro hecho, actualizá también el botón anterior. Si el archivo no se puede reproducir, no lo dejes indicando que está sonando.
+
+31 de octubre de 2026. Menú de favoritos; consulta de esta conversación.
+
+Al presionar el botón del usuario quiero ver un desplegable con las canciones a las que esa cuenta dio me gusta. Mostrá portada, título, banda y álbum, junto con la cantidad. Debe consultar los IDs guardados en la base y mostrar únicamente los temas existentes. Actualizá la lista al abrirla y cuando cambien los me gusta. En las páginas que tienen reproductor, permití escuchar desde la lista los temas con audio disponible.
+
+31 de octubre y 1 de noviembre de 2026. Adaptación y revisión; consultas de esta conversación.
+
+Completá el responsive de los estilos que hagan falta, manteniendo el diseño actual en computadora. Revisá el espacio de la barra de navegación, las columnas de artistas y álbumes, las filas de canciones, los formularios, el reproductor, el desplegable del usuario, Historia y administración. Quiero que las partes se reorganicen en celular y tablet sin cortarse ni desbordarse. Usá CSS cuando sea suficiente y comprobá que los controles sigan siendo cómodos de presionar.
+
+1 de noviembre de 2026. Resumen unificado: documentación y organización de la entrega.
+
+Revisá la rúbrica y comparala con el proyecto actual para listar lo que falta, sin modificarlo durante esa revisión. Después prepará dos imágenes de wireframes, cada una con Inicio y su reproductor, Explorar e Historia. La versión actual debe reflejar el sitio; la anterior debe tener un reproductor más grande, grillas sin sliders, Historia hacia la izquierda sin hover ni controles en la línea, y ninguna opción Admin. Identificá la versión anterior como una reconstrucción de mi descripción.
+
+Generá también una imagen con todas las tablas actuales de Canciones.db, sus columnas, tipos y propiedades como PK, FK, NOT NULL, UNIQUE y AUTOINCREMENT. No incluyas sqlite_sequence ni restricciones inventadas. Finalmente, creá Manual de uso.txt con instalación y versión comprobada de Node.js, dependencias, inicio del servidor, registro, login, reproducción, favoritos, Explorar, Historia, administración y solución de problemas. Basá los documentos en la versión real del proyecto y entregame los enlaces.
+
+1 de noviembre de 2026. Resumen unificado: modularización y estructura final.
+
+Unificá el JavaScript del navegador en cuatro archivos sin subcarpetas dentro de files/public/js. main.js debe encargarse solo de la inicialización y tener menos de 40 líneas. musica.js debe reunir catálogo, búsqueda, navegación, reproductor y me gusta; usuario.js, registro, sesión, perfil, favoritos e Historia; admin.js, formularios y operaciones del administrador.
+
+Conservá los HTML en files/public/html, los CSS en files/public/css, los recursos en files/imagenes y files/canciones, server.js en la raíz y los módulos privados del backend en src. Eliminá los módulos anteriores después de integrarlos, actualizá todas las referencias y evitá registrar eventos dos veces. Los otros archivos pueden ser más largos, pero deben usar funciones claras. Comprobá la carga de páginas, consultas, sesiones y favoritos sin modificar los datos reales durante las pruebas.
+
+1 de noviembre de 2026. Resumen unificado: implementación completa de los me gusta.
+
+Quiero que cada cuenta guarde sus canciones favoritas como una lista JSON en el campo TEXT me_gusta de Usuarios, sin crear una tabla intermedia. Por ejemplo, [3,15,28]. Una cuenta sin favoritos debe comenzar con []. Al dar me gusta se agrega el ID numérico de la canción; al quitarlo, se elimina, sin duplicados ni cambios en otras cuentas.
+
+Identificá al usuario exclusivamente desde su sesión. Agregá GET /api/me-gusta para consultar su lista y PUT /api/me-gusta/:id para indicar un estado explícito: me_gusta true agrega y false quita. Así, repetir una petición no invierte el resultado accidentalmente. Validá la sesión, que el ID sea un entero positivo, que exista la canción y que el estado sea booleano. Hacé la lectura y actualización del JSON dentro de una transacción con consultas parametrizadas, para no perder cambios entre pestañas. No sobrescribas contenido inválido silenciosamente. Si falta la columna, prepará su creación; inicializá las cuentas con valores nulos o vacíos sin borrar listas válidas.
+
+Al seleccionar una canción, mostrá el botón en la esquina superior derecha del reproductor de Inicio y Explorar. Usá las imágenes sin_me_gusta y me_gusta, servidas como PNG aunque no tengan extensión. Consultá la lista para mostrar si el tema ya está marcado. Mientras carga o guarda, evitá clics repetidos y actualizá el estado cuando confirme el servidor. Si cambia la canción antes de llegar la respuesta, no apliques el estado anterior al tema nuevo. Los invitados deben recibir un acceso para iniciar sesión y los errores deben permitir reintentar sin simular un guardado exitoso.
+
+En el menú del usuario agregá Tus me gusta con cantidad, portada, título, artista y álbum. Relacioná los IDs guardados con el catálogo y mostrá solo canciones existentes. Actualizá al abrir el menú y al cambiar un favorito mientras esté abierto. En Inicio y Explorar agregá reproducción desde la lista para canciones con audio disponible. Incluí mensaje de lista vacía, desplazamiento si es larga y cierre mediante el botón del usuario, clic afuera o Escape.
+
+Probá el guardado real del JSON, su persistencia al volver a iniciar sesión, la separación entre cuentas, las repeticiones, quitar un favorito, las peticiones inválidas y los cambios rápidos de canción. Usá una copia de la base para las pruebas. Si el navegador sigue consultando una ruta que no existe porque quedó abierto el servidor viejo, identificá la instancia del proyecto, reiniciala y comprobá la respuesta antes de darlo por solucionado.

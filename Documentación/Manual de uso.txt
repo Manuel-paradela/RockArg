@@ -1,0 +1,634 @@
+﻿ROCKARG
+MANUAL DE USO
+Guía de instalación, puesta en marcha y uso de la página
+======================================================================
+1. QUÉ ES ROCKARG
+======================================================================
+RockArg es una página dedicada al rock nacional argentino. Permite
+consultar los artistas, álbumes y canciones de una base de datos SQLite,
+buscar música, reproducir los audios disponibles, guardar me gusta por
+usuario y recorrer una línea del tiempo con hechos de la historia del
+rock nacional.
+
+La página se ejecuta mediante un servidor Node.js. El navegador consulta
+ese servidor para obtener los datos y guardar los cambios.
+
+Se puede explorar el catálogo y reproducir los archivos disponibles sin
+crear una cuenta. Para guardar y consultar me gusta se debe iniciar sesión.
+El panel de administración requiere, además, una cuenta autorizada.
+
+======================================================================
+2. REQUISITOS Y VERSIONES
+======================================================================
+Esta guía está orientada a Windows.
+
+Se necesita:
+- El proyecto completo, extraído de su archivo ZIP si corresponde.
+- El archivo crear_bdd.py incluido en el proyecto. Con él se genera
+  Canciones.db; no hace falta recibir la base ya creada.
+- Python 3.12 o superior para ejecutar ese archivo una vez.
+- Node.js y npm instalados.
+- Un navegador actualizado, como Chrome, Edge o Firefox.
+- Conexión a Internet para descargar Node.js y las dependencias.
+- Los archivos de imágenes y canciones que acompañan al proyecto.
+
+Versiones comprobadas en el equipo de desarrollo:
+- Node.js: 24.22.1.
+- npm: 11.19.1.
+- Python: 3.12.14 para la creación de la base de datos.
+
+Para reproducir el entorno de desarrollo, utilizar Node.js 24.22.1.
+La página de descargas puede ofrecer versiones más nuevas; la indicada
+arriba es la comprobada para este proyecto, no necesariamente la última.
+
+No se necesita instalar un servidor MySQL ni crear una cuenta en un
+servicio de bases de datos: SQLite trabaja con el archivo Canciones.db.
+Tampoco hace falta una cuenta en npm para instalar las dependencias.
+
+======================================================================
+3. INSTALAR NODE.JS Y NPM
+======================================================================
+1. Abrir el navegador e ingresar al sitio oficial:
+   https://nodejs.org/en/download
+
+2. Buscar la versión 24.22.1 en las versiones anteriores si no aparece
+   entre las opciones principales. El archivo de versiones está en:
+   https://nodejs.org/en/download/releases/
+
+3. Elegir el instalador para Windows y la arquitectura del equipo.
+   En una computadora Windows habitual de 64 bits, corresponde x64.
+   Si el equipo es ARM, elegir el instalador adecuado para esa arquitectura.
+
+4. Descargar y abrir el instalador .msi.
+
+5. Seguir el asistente de instalación. Mantener seleccionadas las opciones
+   de npm y de agregar Node.js al PATH. El PATH permite ejecutar node y
+   npm desde una terminal sin escribir su ubicación completa.
+
+6. Finalizar la instalación y cerrar las terminales que estuvieran abiertas.
+
+7. Abrir una terminal nueva: Símbolo del sistema (CMD) o PowerShell.
+
+8. Ejecutar estos comandos, uno por vez:
+
+   node --version
+   npm --version
+
+9. Para el entorno comprobado, el primer comando muestra v24.22.1 y el
+   segundo 11.19.1. Si aparecen números de versión, ambos programas se
+   reconocen correctamente.
+
+Si el sistema dice que node o npm no se reconocen, cerrar y abrir la
+terminal. Si sigue ocurriendo, revisar la instalación y la opción PATH.
+
+======================================================================
+3.1. INSTALAR PYTHON PARA CREAR LA BASE DE DATOS
+======================================================================
+1. Abrir la página oficial de instaladores para Windows:
+   https://www.python.org/downloads/windows/
+
+2. Instalar Python 3.12 o superior, eligiendo la arquitectura del equipo.
+   Si se usa el instalador tradicional, seleccionar Add Python to PATH
+   y conservar el lanzador de Python cuando el asistente lo ofrezca.
+
+3. Cerrar y abrir la terminal para que reconozca la instalación.
+
+4. Comprobar la versión con uno de estos comandos:
+
+   py --version
+
+   Si py no se reconoce, probar:
+
+   python --version
+
+El script utiliza sqlite3, pathlib, argparse, getpass y otros módulos
+incluidos en Python. No necesita pip install ni descargar SQLite aparte.
+Python se usa para preparar la base; Node.js ejecuta después la página.
+
+======================================================================
+4. PREPARAR LA CARPETA DEL PROYECTO
+======================================================================
+1. Copiar o descargar el proyecto completo.
+2. Si se recibió un ZIP, extraerlo antes de ejecutar comandos.
+3. Abrir la carpeta principal: es la que contiene server.js y package.json.
+4. Comprobar que también estén package-lock.json, crear_bdd.py y files.
+   Canciones.db aparecerá después de ejecutar el script de creación.
+
+La estructura principal es:
+
+proyecto final/
+  server.js
+  package.json
+  package-lock.json
+  crear_bdd.py
+  Canciones.db (se genera al ejecutar crear_bdd.py)
+  files/
+    public/
+      html/
+      css/
+    js/
+    imagenes/
+    canciones/
+
+Los cuatro JavaScript del navegador y los dos módulos privados del servidor
+(servidor-app.js y servidor-rutas.js) se encuentran en files/js.
+server.js se mantiene en la raíz y llama a la función crearServidor().
+
+No cambiar de lugar Canciones.db ni mover las carpetas de imágenes y audio.
+El servidor utiliza esa estructura para localizar los recursos.
+
+Para abrir una terminal en la carpeta:
+- En el Explorador de archivos, entrar en la carpeta principal.
+- Hacer clic en la barra de direcciones, escribir cmd y presionar Enter.
+- También se puede usar la opción de abrir una terminal en esa ubicación.
+
+Otra opción, desde una terminal abierta, es ejecutar:
+
+   cd "C:\Users\manue\OneDrive\Desktop\Manu\colegio\Informatica\proyecto final"
+
+Ese es el directorio del equipo de desarrollo. En otra computadora hay
+que reemplazarlo por la ubicación donde se haya guardado el proyecto.
+Las comillas son importantes cuando la ruta contiene espacios.
+
+======================================================================
+5. INSTALAR LAS DEPENDENCIAS (NODE_MODULES)
+======================================================================
+La carpeta node_modules contiene los paquetes necesarios para ejecutar el
+servidor. No se descarga como un programa independiente: npm la prepara.
+
+Con la terminal ubicada junto a package.json, ejecutar:
+
+   npm ci
+
+Esperar hasta que el comando termine y vuelva a aparecer el indicador de
+la terminal. npm ci utiliza las versiones registradas en package-lock.json
+y vuelve a instalar node_modules; por eso no se debe ejecutar mientras el
+servidor esté en uso.
+
+Si se está preparando una copia sin package-lock.json, se puede ejecutar:
+
+   npm install
+
+La entrega del proyecto debe conservar package-lock.json para poder usar
+npm ci y reproducir las versiones fijadas. No hace falta instalar los
+paquetes uno por uno ni instalarlos globalmente.
+
+Dependencias declaradas y versiones fijadas en este proyecto:
+
+- express 5.3.0: servidor HTTP y rutas de la API.
+- better-sqlite3 13.0.3: acceso al archivo de base de datos SQLite.
+- cors 2.8.6: configuración de acceso HTTP entre orígenes.
+- dotenv 18.0.9: lectura de variables de entorno, como PORT.
+- bcryptjs 3.0.3: biblioteca para hash de contraseñas, incluida como
+  dependencia; el inicio de sesión actual no la utiliza.
+- express-session 1.19.0: biblioteca de sesiones, incluida como dependencia;
+  la versión actual del proyecto administra sus sesiones con código propio.
+
+npm también instala automáticamente las dependencias internas de esos
+paquetes. No se deben mover ni editar los archivos de node_modules.
+
+Para consultar los paquetes principales instalados, ejecutar:
+
+   npm ls --depth=0
+
+La instalación se hace al preparar el proyecto o al cambiar dependencias.
+No es necesario repetirla cada vez que se abre la página.
+
+======================================================================
+5.1. GENERAR CANCIONES.DB ANTES DE INICIAR EL SERVIDOR
+======================================================================
+La entrega incluye crear_bdd.py en lugar del archivo Canciones.db.
+El script es independiente: contiene tanto el esquema como los datos
+del catálogo, sin necesitar abrir una base anterior ni otro archivo SQL.
+
+1. Detener el servidor si estaba abierto. Todavía no ejecutar npm start.
+2. Abrir CMD o PowerShell en la raíz del proyecto, donde están
+   crear_bdd.py, server.js y package.json.
+3. Para crear la base y la primera cuenta administradora, ejecutar:
+
+   py crear_bdd.py --crear-admin
+
+   Si se utiliza el comando python en vez de py:
+
+   python crear_bdd.py --crear-admin
+
+4. El script crea Canciones.db en la misma carpeta que crear_bdd.py,
+   aunque el comando se ejecute desde otra ubicación.
+5. Escribir el nombre y el usuario de la nueva cuenta administradora,
+   una contraseña y su confirmación cuando el programa los solicite.
+   La contraseña no se muestra mientras se escribe: es normal.
+6. Esperar el mensaje de creación correcta. Conservar los datos elegidos
+   para iniciar sesión más adelante.
+7. Comprobar que apareció Canciones.db junto a server.js.
+8. Ejecutar npm start y abrir http://localhost:3000/.
+
+Si solo se desea crear la base y el catálogo, sin una cuenta inicial:
+
+   py crear_bdd.py
+
+Después se puede crear la cuenta administradora con:
+
+   py crear_bdd.py --crear-admin
+
+El catálogo incluido tiene 26 bandas o solistas, 63 discos y 255 canciones.
+No se copian cuentas, contraseñas ni favoritos personales de la base de
+trabajo. Los usuarios normales se crean desde Registrarse en la página.
+Se omitió únicamente el registro de canción ID 203, que referenciaba al
+álbum 29 inexistente; el resto del catálogo conserva sus datos e IDs.
+
+Las tablas se crean en este orden y con sus nombres exactos:
+1. bandas/solista
+2. discos
+3. todas_las_canciones
+4. Usuarios
+5. Usuarios_admin
+
+Se conservan tipos, claves, índices y restricciones del esquema actual.
+Las claves foráneas se activan al crear la base. Se comprueba que las
+canciones referencien discos existentes y que los permisos se relacionen
+con usuarios existentes. No se agregan claves foráneas nuevas donde el
+esquema original no las declara.
+
+Si Canciones.db ya existe, el script no la reemplaza ni vuelve a insertar
+el catálogo. El parámetro --crear-admin solo agrega una cuenta nueva y su
+permiso; si ese usuario ya existe, informa el problema sin modificarlo.
+No borrar la base para repetir el comando: contiene las cuentas y cambios
+que se hayan hecho después. Para una instalación nueva en otro equipo,
+extraer la entrega y ejecutar allí el script antes de iniciar Node.js.
+
+Si aparece que no se encuentra crear_bdd.py, revisar la carpeta actual.
+Si aparece que py o python no se reconocen, completar la instalación del
+apartado 3.1. Si hay un error de escritura, usar una carpeta donde se
+puedan crear archivos y cerrar programas que estén editando la base.
+
+======================================================================
+6. INICIAR, DETENER Y REINICIAR EL SERVIDOR
+======================================================================
+INICIAR
+1. Abrir la terminal en la carpeta principal del proyecto y comprobar que
+   Canciones.db ya fue creada según el apartado 5.1.
+2. Ejecutar:
+
+   npm start
+
+   También se puede utilizar node server.js, pero alcanza con uno de
+   estos comandos; no ejecutar dos servidores al mismo tiempo.
+
+3. Esperar el mensaje que indica que RockArg está disponible.
+4. Mantener abierta la terminal mientras se utiliza la página.
+5. Abrir el navegador e ingresar:
+
+   http://localhost:3000/
+
+El servidor dirige a la página principal. No abrir index.html con doble
+clic ni utilizar una dirección file://: las consultas y las sesiones
+necesitan el servidor Node.js.
+
+DETENER
+En la terminal donde se ejecuta el servidor, presionar Ctrl + C.
+Si Windows pide confirmar la finalización, aceptar.
+
+REINICIAR
+Detener con Ctrl + C y volver a ejecutar npm start. Esto es necesario
+cuando se modifican archivos del servidor: la versión actual no se
+reinicia automáticamente al guardar cambios.
+
+Las sesiones se guardan en la memoria del servidor y duran hasta 24 horas.
+Al reiniciar el servidor se cierran las sesiones, por lo que hay que volver
+a iniciar sesión. Las cuentas y los me gusta permanecen en Canciones.db.
+
+PUERTO OPCIONAL
+Por defecto se utiliza 3000. Si fuera necesario cambiarlo, configurar la
+variable PORT en un archivo .env ubicado junto a server.js. Por ejemplo:
+
+   PORT=3001
+
+Después reiniciar y abrir http://localhost:3001/. Para el funcionamiento
+normal no hace falta crear un archivo .env.
+
+======================================================================
+7. CONOCER LA PÁGINA PRINCIPAL
+======================================================================
+En la barra superior se encuentran Inicio, Explorar e Historia.
+Sin sesión aparecen las opciones para iniciar sesión y registrarse.
+Con sesión aparece el botón del usuario, que abre su menú desplegable.
+
+La página principal presenta RockArg y tiene accesos a la biblioteca y
+a la historia del rock nacional. También incluye un buscador de canciones,
+artistas y álbumes.
+
+El reproductor aparece después de seleccionar una canción que tenga un
+archivo de audio asignado. Antes de esa selección puede estar oculto.
+
+El enlace Admin aparece en Inicio únicamente para cuentas autorizadas.
+No es necesario entrar al administrador para escuchar música.
+
+======================================================================
+8. CREAR UNA CUENTA
+======================================================================
+1. Presionar Registrarse en la barra de navegación. También se puede
+   entrar desde Crear una cuenta en la pantalla de inicio de sesión.
+2. Completar el campo Nombre: es el nombre de la persona y admite hasta
+   50 caracteres.
+3. Elegir un Nombre de usuario que no esté registrado:
+   - Entre 3 y 20 caracteres.
+   - Letras de la A a la Z, números, punto, guion o guion bajo.
+   - Sin espacios ni tildes.
+4. Escribir una contraseña de entre 4 y 128 caracteres.
+5. Presionar Registrarse y esperar la confirmación.
+6. Si aparece un error, corregir el campo indicado y volver a enviar.
+7. Cuando la cuenta se crea correctamente, presionar Iniciar sesión.
+
+El registro no solicita un correo electrónico. Nombre y Nombre de usuario
+son campos diferentes. Al crear la cuenta no se inicia sesión de forma
+automática.
+
+Si el usuario ya existe, elegir otro. Las comparaciones del nombre de
+usuario no distinguen mayúsculas y minúsculas ASCII.
+
+El botón Volver al inicio permite regresar sin completar el registro.
+
+======================================================================
+9. INICIAR SESIÓN
+======================================================================
+1. Presionar Iniciar sesión.
+2. Escribir el nombre de usuario elegido al registrarse.
+3. Escribir la contraseña correspondiente, respetando sus caracteres.
+4. Presionar Iniciar sesión.
+5. Si los datos son correctos, se abre la página principal y aparece el
+   botón del usuario en la barra superior.
+
+Si los datos son incorrectos, revisar ambos campos y volver a intentarlo.
+Esta versión no incluye recuperación automática de contraseñas.
+Las cookies del navegador deben estar permitidas para conservar la sesión.
+
+======================================================================
+10. BUSCAR Y ESCUCHAR CANCIONES
+======================================================================
+BUSCAR
+1. Entrar en Inicio o Explorar.
+2. Escribir parte del título de una canción, del nombre del artista o del
+   nombre de un álbum en el buscador.
+3. Los resultados se actualizan mientras se escribe.
+4. Cada fila muestra el título, el artista, el álbum, la duración y el
+   botón de reproducción.
+5. Para volver a la vista anterior, borrar la búsqueda o usar su botón
+   para limpiar, cuando esté disponible.
+
+REPRODUCIR
+1. Buscar una canción o entrar a su álbum desde Explorar.
+2. Presionar el ícono de play de su fila.
+3. Si la canción tiene un archivo de audio válido, comienza la reproducción
+   y aparece el reproductor con la portada y los datos del tema.
+4. Presionar pausa para detener temporalmente el audio.
+5. Presionar play para continuar desde la misma posición.
+6. Presionar otra parte de la barra de progreso para adelantar o retroceder.
+7. Consultar los tiempos que aparecen debajo de la barra.
+8. Para cambiar de tema, presionar play en otra canción.
+
+Presionar nuevamente el botón de la misma fila también alterna entre play
+y pausa. El volumen se ajusta desde el dispositivo o el navegador: el
+reproductor no incorpora un control de volumen propio.
+
+No todas las canciones del catálogo tienen un archivo de audio disponible.
+Una canción sin archivo asignado no comienza a reproducirse. La existencia
+del título en la base de datos no garantiza que su MP3 esté incluido.
+
+La reproducción no continúa automáticamente al navegar a otra página ni
+al terminar cambia por sí sola a la siguiente canción.
+
+======================================================================
+11. DAR Y QUITAR ME GUSTA
+======================================================================
+1. Iniciar sesión con la cuenta donde se quieren guardar los favoritos.
+2. Elegir una canción para que aparezca en el reproductor.
+3. Localizar el botón de me gusta en la esquina superior derecha.
+4. Presionarlo y esperar la confirmación.
+5. La imagen cambia de sin_me_gusta a me_gusta cuando se guarda.
+
+El ID de la canción se agrega a la lista JSON del campo me_gusta del
+usuario que inició sesión. Una misma canción no se agrega repetida.
+
+Para quitarla, volver a presionar el botón. La imagen regresa al estado
+sin_me_gusta y se elimina el ID de la lista.
+
+Los me gusta pertenecen a cada cuenta y permanecen al cerrar sesión o
+reiniciar el servidor. Otro usuario tiene su propia lista.
+
+Si se presiona el botón sin sesión iniciada, aparece una indicación y
+un acceso para iniciar sesión. No se guarda un me gusta de invitado.
+Si el botón está temporalmente deshabilitado, esperar a que termine la
+consulta o el guardado.
+
+======================================================================
+12. CONSULTAR LOS FAVORITOS DESDE EL MENÚ DE USUARIO
+======================================================================
+1. Con la sesión iniciada, presionar el ícono del usuario en la barra.
+2. Se abre el menú desplegable del perfil.
+3. Buscar la sección Tus me gusta.
+4. Se muestra la cantidad y una lista con portada, canción, artista y álbum.
+5. Si hay varias canciones, desplazarse dentro de la lista.
+
+En Inicio y Explorar, las canciones con archivo de audio tienen un botón
+para reproducirlas desde el menú. En Historia se puede consultar la lista,
+pero no aparece ese control del reproductor principal.
+
+La lista se consulta de nuevo al abrir el menú. Si está abierto cuando se
+agrega o quita un me gusta, se actualiza. Si no hay favoritos, aparece el
+mensaje correspondiente.
+
+Para cerrar el desplegable, presionar otra vez el ícono, hacer clic fuera
+del menú o presionar Escape.
+
+======================================================================
+13. MODIFICAR EL USUARIO Y CERRAR SESIÓN
+======================================================================
+CAMBIAR NOMBRE DE USUARIO
+1. Abrir el menú del usuario.
+2. Localizar el campo para cambiar el nombre de usuario.
+3. Escribir el nuevo usuario: entre 3 y 20 caracteres, con los mismos
+   caracteres permitidos durante el registro.
+4. Presionar Guardar usuario o Guardar nombre, según la pantalla.
+5. Esperar la confirmación. Si está ocupado o no es válido, corregirlo.
+
+Aunque alguna pantalla use la etiqueta Guardar nombre, se modifica el
+usuario de acceso. A partir del cambio se debe utilizar el nuevo usuario
+para iniciar sesión. La contraseña y los me gusta se conservan.
+
+CERRAR SESIÓN
+1. Abrir el menú del usuario.
+2. Presionar Cerrar sesión.
+3. La página vuelve a Inicio y muestra los accesos de login y registro.
+
+Cerrar sesión no elimina la cuenta ni borra sus favoritos.
+
+======================================================================
+14. EXPLORAR ARTISTAS, ÁLBUMES Y CANCIONES
+======================================================================
+1. Presionar Explorar en la navegación o Explorar la biblioteca en Inicio.
+2. La sección muestra las pestañas Artistas y Álbumes, un buscador y los
+   controles de paginación.
+
+ARTISTAS
+1. Seleccionar Artistas.
+2. Consultar las tarjetas de bandas y solistas cargados en la base.
+3. Utilizar las flechas anterior y siguiente para recorrer el catálogo.
+   Se muestran cinco artistas por página; el indicador informa la página
+   actual y el total. La distribución de tarjetas cambia según el ancho.
+4. Las flechas se deshabilitan al llegar al principio o al final.
+5. Presionar la tarjeta de un artista para ver sus álbumes.
+6. Presionar una portada para consultar las canciones de ese álbum.
+7. Utilizar play en una canción disponible para escucharla.
+8. Usar Volver a artistas o Volver para regresar a la vista anterior.
+
+Todos los artistas de la base pueden recorrerse mediante las páginas;
+no se muestran necesariamente todos juntos en una única pantalla.
+Si un artista no tiene discos cargados, no aparecerán álbumes asociados.
+
+ÁLBUMES
+1. Seleccionar Álbumes.
+2. Recorrer las portadas con las flechas. Se muestran hasta diez álbumes
+   por página, con su nombre, artista y año.
+3. Presionar un álbum para abrir su lista de canciones.
+4. Reproducir una canción o regresar con Volver.
+
+BUSCADOR
+El buscador permite localizar canciones por título, banda o álbum, sin
+recorrer manualmente las páginas. Al vaciarlo, vuelve el contenido de
+Explorar. La búsqueda no modifica los datos del catálogo.
+
+======================================================================
+15. USAR LA LÍNEA DEL TIEMPO DE HISTORIA
+======================================================================
+1. Presionar Historia en la barra de navegación.
+2. Leer la introducción y desplazarse por los hechos ordenados en el tiempo.
+3. Cada hecho contiene una fecha, un título, un texto y una imagen.
+4. Las etiquetas ayudan a reconocer hitos, álbumes y fallecimientos.
+5. En computadora, al pasar el cursor por un hecho se resalta su contenido.
+6. Para escuchar un audio disponible, presionar el botón de play sobre
+   la línea del tiempo.
+7. El botón cambia a pausa cuando el audio comienza.
+8. Presionarlo nuevamente para pausar y otra vez para continuar.
+9. Al seleccionar otro hecho, se detiene el audio anterior y se intenta
+   reproducir el nuevo. Al terminar, el ícono vuelve a play.
+
+En pantallas pequeñas, la línea se desplaza hacia la izquierda y el
+contenido se acomoda en una columna. En dispositivos táctiles no hace
+falta pasar un cursor para leer el contenido.
+
+Algunos hechos tienen una referencia de audio cuyo archivo puede no estar
+incluido en la entrega. Si no suena, probar otro hecho o consultar al
+responsable del proyecto. Esto no impide leer la línea del tiempo.
+
+El audio de Historia es independiente del reproductor del catálogo y no
+incorpora un botón de me gusta propio.
+======================================================================
+16. PANEL ADMINISTRADOR
+======================================================================
+Esta sección está destinada únicamente a cuentas autorizadas.
+Crear una cuenta común no otorga permisos de administración.
+
+INGRESAR
+1. Iniciar sesión con una cuenta autorizada por el responsable del proyecto.
+2. Ir a Inicio y presionar Admin.
+3. Si no aparece el enlace, la cuenta puede no tener autorización.
+4. El servidor verifica los permisos también al consultar y modificar datos.
+
+La autorización se registra en Usuarios_admin. No existe una opción de
+la interfaz para que un usuario se convierta a sí mismo en administrador.
+La primera cuenta administradora se prepara con:
+
+   py crear_bdd.py --crear-admin
+
+Este comando crea una cuenta nueva y su registro en Usuarios_admin.
+Después, una cuenta administradora puede otorgar permisos desde el panel.
+
+AGREGAR UN USUARIO ADMINISTRADOR
+1. Iniciar sesión con una cuenta que ya sea administradora.
+2. Entrar en Admin desde Inicio.
+3. Presionar Agregar usuario administrador.
+4. Desplegar la lista y seleccionar una cuenta registrada. Las cuentas
+   que ya son administradoras aparecen indicadas y no se pueden elegir.
+5. Presionar Agregar administrador y esperar la confirmación.
+6. La cuenta seleccionada ya puede acceder al panel. Si no ve el enlace
+   Admin en Inicio, recargar la página.
+
+Solo los administradores pueden ver esta lista y otorgar permisos.
+Esta función agrega permisos; no elimina administradores.
+
+AGREGAR
+1. Elegir Canciones, Álbumes o Bandas y artistas.
+2. Presionar Agregar.
+3. Completar el formulario y guardar.
+
+Campos según el tipo:
+- Bandas y artistas: nombre.
+- Álbumes: nombre, año, banda o artista y archivo de imagen de portada.
+- Canciones: nombre, álbum, duración en segundos y archivo de audio
+  opcional. La duración debe ser un entero mayor o igual a cero.
+
+Para cargar contenido relacionado, primero crear el artista, después su
+álbum y, por último, las canciones.
+
+MODIFICAR
+1. Elegir el tipo de registro.
+2. Presionar Modificar.
+3. Seleccionar el registro del desplegable.
+4. Corregir los campos y guardar los cambios.
+
+BORRAR
+1. Elegir el tipo y presionar Borrar.
+2. Seleccionar el registro.
+3. Presionar Confirmar borrado y aceptar la confirmación del navegador
+   solo si corresponde eliminarlo.
+
+No se puede borrar una banda con álbumes asociados ni un álbum con
+canciones asociadas desde este panel. Se deben resolver primero esas
+relaciones. El borrado modifica la base: no hay una papelera del sitio.
+
+ARCHIVOS MULTIMEDIA
+El formulario guarda el nombre del archivo; no sube imágenes ni audios.
+El responsable debe colocar las portadas en files/imagenes/albumes y los
+MP3 en files/canciones, usando exactamente el nombre y la extensión
+registrados. Las fotos de artistas se leen de la columna imagenes de bandas/solista.
+Colocar el archivo en files/imagenes/foto_bandas y guardar su nombre exacto
+en esa columna. El formulario de bandas actual solo permite editar el nombre.
+======================================================================
+17. FUENTES DE INSTALACIÓN
+======================================================================
+Descarga oficial de Node.js:
+https://nodejs.org/en/download
+
+Archivo de versiones de Node.js:
+https://nodejs.org/en/download/releases/
+
+Documentación oficial del comando npm ci:
+https://docs.npmjs.com/cli/v11/commands/npm-ci/
+
+Python para Windows:
+https://www.python.org/downloads/windows/
+
+Información oficial sobre instalación de Node.js y npm:
+https://docs.npmjs.com/downloading-and-installing-node-js-and-npm/
+
+npm y su registro de paquetes:
+https://www.npmjs.com/
+
+Dependencias del proyecto (consulta y descarga mediante npm ci):
+Express:
+https://www.npmjs.com/package/express
+better-sqlite3:
+https://www.npmjs.com/package/better-sqlite3
+cors:
+https://www.npmjs.com/package/cors
+dotenv:
+https://www.npmjs.com/package/dotenv
+bcryptjs:
+https://www.npmjs.com/package/bcryptjs
+express-session:
+https://www.npmjs.com/package/express-session
+
+No descargar node_modules desde páginas externas. npm ci instala estos
+paquetes y sus dependencias internas desde package-lock.json. npm forma
+parte de la instalación habitual de Node.js; no se necesita un instalador
+separado de npm para seguir este manual.

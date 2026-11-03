@@ -1,0 +1,298 @@
+/* BOTONES DE AUTENTICACIÓN */
+#authLinks {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.nav-actions {
+  position: relative;
+}
+/* ICONO DE USUARIO */
+.user-icon-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 5px;
+  border: 1px solid #5eaadb;
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+.user-icon-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+/* PANEL DEL PERFIL */
+.user-menu {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 1000;
+  width: 290px;
+  max-width: calc(100vw - 32px);
+  padding: 22px;
+  color: #fff;
+  background: #171b22;
+  border: 1px solid #343c47;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+.user-menu h3 {
+  margin: 0 0 18px;
+}
+.user-email-label {
+  margin-bottom: 4px;
+  color: #aab3bf;
+  font-size: 13px;
+}
+.user-email {
+  margin-top: 0;
+  overflow-wrap: anywhere;
+}
+.user-menu form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 18px;
+}
+.user-menu input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px;
+  color: #fff;
+  background: #242b35;
+  border: 1px solid #485362;
+  border-radius: 6px;
+}
+.user-menu input:focus {
+  outline: 2px solid #5eaadb;
+  outline-offset: 1px;
+}
+.user-menu button {
+  cursor: pointer;
+}
+.user-menu #mensajePerfil {
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.btn-logout {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  color: #fff;
+  background: transparent;
+  border: 1px solid #5eaadb;
+  border-radius: 6px;
+}
+.btn-logout:hover {
+  background: #263b4a;
+}
+/* RESPETAR EL ATRIBUTO HIDDEN */
+[hidden] {
+  display: none !important;
+}
+/* Contenedor de los botones y el perfil */
+.nav-actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+}
+#authLinks {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+/* Ocultar elementos cuando tienen el atributo hidden */
+[hidden] {
+  display: none !important;
+}
+/* Botón con la imagen del usuario */
+.boton-usuario {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid #5eaadb;
+  border-radius: 50%;
+  background: #171717;
+  cursor: pointer;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.boton-usuario img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.boton-usuario:hover {
+  border-color: #ffffff;
+}
+/* Panel desplegable del perfil */
+.panel-usuario {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  z-index: 1000;
+  width: 280px;
+  padding: 20px;
+  border: 1px solid #5eaadb;
+  border-radius: 12px;
+  background: #181818;
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+.panel-usuario h3 {
+  margin: 0 0 18px;
+  color: #5eaadb;
+}
+.etiqueta-perfil {
+  margin-bottom: 4px;
+  color: #aaaaaa;
+  font-size: 13px;
+}
+.correo-usuario {
+  margin-top: 0;
+  margin-bottom: 20px;
+  overflow-wrap: anywhere;
+}
+.panel-usuario form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.panel-usuario label {
+  font-size: 14px;
+}
+.panel-usuario input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #444444;
+  border-radius: 6px;
+  background: #252525;
+  color: #ffffff;
+}
+.panel-usuario input:focus {
+  outline: 1px solid #5eaadb;
+  border-color: #5eaadb;
+}
+.panel-usuario form .btn {
+  width: 100%;
+  cursor: pointer;
+}
+#mensajePerfil {
+  margin: 0;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.btn-cerrar-sesion {
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px;
+  border: 1px solid #555555;
+  border-radius: 6px;
+  background: transparent;
+  color: #ffffff;
+  cursor: pointer;
+}
+.btn-cerrar-sesion:hover {
+  border-color: #5eaadb;
+  background: #252525;
+}
+/* PERFIL Y AVATAR */
+.nav-actions {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+#authLinks {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+[hidden] {
+  display: none !important;
+}
+.boton-usuario {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+  background: transparent;
+}
+.boton-usuario img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.panel-usuario {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 1000;
+  width: 280px;
+  padding: 16px;
+  box-sizing: border-box;
+  color: #fff;
+  background: #171b24;
+  border: 1px solid #343b49;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px #0005;
+}
+.panel-usuario h3 {
+  margin-top: 0;
+}
+.panel-usuario form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.panel-usuario input {
+  width: 100%;
+  padding: 9px;
+  box-sizing: border-box;
+}
+.btn-cerrar-sesion {
+  margin-top: 12px;
+  padding: 9px 12px;
+  cursor: pointer;
+}
+#enlaceAdmin[hidden] {
+  display: none !important;
+}
+
+/* Canciones favoritas en el desplegable del usuario. */
+.panel-usuario.favoritos-panel {
+  width: min(360px, calc(100vw - 40px));
+  max-height: calc(100vh - 150px);
+  max-height: calc(100dvh - 150px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.favoritos-section { margin: 20px 0; padding: 18px 0; border-block: 1px solid var(--line); }
+.favoritos-section h4 { margin: 0 0 12px; font-size: 14px; font-weight: 600; }
+#cantidadFavoritos { color: var(--gray); font-size: 12px; font-weight: 400; }
+.favoritos-status { margin: 0; font-size: 13px; line-height: 1.6; color: #b4b4c0; }
+.favoritos-status:empty { display: none; }
+.favoritos-lista { list-style: none; margin: 0; padding: 0; max-height: 260px; overflow-y: auto; overscroll-behavior: contain; }
+.favoritos-lista li { display: flex; gap: 10px; align-items: center; padding: 10px 2px; }
+.favoritos-lista li + li { border-top: 1px solid var(--line); }
+.favoritos-lista li > img { width: 42px; height: 42px; flex-shrink: 0; border-radius: 6px; object-fit: cover; }
+.favoritos-lista li > div { flex: 1; min-width: 0; }
+.favoritos-lista strong { display: block; font-size: 13px; line-height: 1.5; overflow-wrap: anywhere; }
+.favoritos-lista span { display: block; margin-top: 3px; font-size: 11px; color: #b4b4c0; line-height: 1.5; overflow-wrap: anywhere; }
+.favorito-play { display: grid; place-items: center; width: 40px; height: 40px; flex-shrink: 0; border: 0; background: transparent; border-radius: 50%; cursor: pointer; }
+.favorito-play img { display: block; width: 30px; height: 30px; }
+.favorito-play:hover { background: var(--navy-2); }
+.favorito-play:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }

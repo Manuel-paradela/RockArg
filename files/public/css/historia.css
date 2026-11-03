@@ -1,0 +1,223 @@
+/* ====================================================== */
+/* HISTORIA */
+/* ====================================================== */
+.historia-intro{
+  font-size:14px;
+  color:var(--gray);
+  max-width:620px;
+  line-height:1.6;
+  margin-bottom:60px;
+}
+/* ====================================================== */
+/* LÍNEA DE TIEMPO */
+/* ====================================================== */
+.timeline{
+  /*
+    position:relative es fundamental.
+    La línea vertical y los círculos usan position:absolute.
+    Al poner relative acá, sus porcentajes y posiciones
+    quedan calculados respecto de ESTA línea de tiempo
+    y no respecto de toda la página.
+  */
+  position:relative;
+  width:100%;
+}
+/* Línea vertical central */
+.timeline::before{
+  content:"";
+  /*
+    absolute permite ubicar la línea independientemente
+    del resto del contenido.
+  */
+  position:absolute;
+  top:0;
+  bottom:0;
+  /*
+    El borde izquierdo de la línea se coloca al 50%
+    exacto del ancho del timeline.
+  */
+  left:50%;
+  width:4px;
+  background:var(--blue);
+  border-radius:10px;
+  /*
+    Como left:50% coloca el BORDE izquierdo de la línea
+    en el centro, translateX(-50%) la desplaza hacia
+    atrás la mitad de su propio ancho.
+    Resultado: el CENTRO de la línea está exactamente
+    en el 50%.
+  */
+  transform:translateX(-50%);
+  z-index:1;
+}
+/* ====================================================== */
+/* CADA HECHO */
+/* ====================================================== */
+.timeline-item{
+  position:relative;
+  /*
+    Cada evento tiene dos columnas:
+    izquierda = texto
+    derecha = imagen.
+    El espacio central se crea con column-gap.
+    La línea pasa justamente por el medio de ese espacio.
+  */
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  column-gap:130px;
+  align-items:center;
+  min-height:230px;
+  margin-bottom:55px;
+}
+/* ====================================================== */
+/* TEXTO */
+/* ====================================================== */
+.timeline-content{
+  grid-column:1;
+  padding:22px 26px;
+  border:1px solid transparent;
+  border-radius:16px;
+  /*
+    transition hace que el cambio producido por :hover
+    no ocurra instantáneamente, sino suavemente.
+  */
+  transition:
+    transform .25s ease,
+    border-color .25s ease,
+    background-color .25s ease,
+    box-shadow .25s ease;
+}
+.timeline-content .year{
+  font-size:12px;
+  color:var(--gray);
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+.timeline-content h3{
+  font-size:19px;
+  margin:4px 0 6px;
+  color:var(--cream);
+  font-family:'Inter',sans-serif;
+  font-weight:600;
+  letter-spacing:0;
+}
+.timeline-content p{
+  font-size:14px;
+  line-height:1.65;
+  color:var(--gray);
+  margin:0;
+}
+/* ====================================================== */
+/* ETIQUETAS */
+/* ====================================================== */
+.tag{
+  display:inline-block;
+  font-size:10px;
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  padding:2px 10px;
+  border-radius:10px;
+  vertical-align:middle;
+}
+.tag.death{
+  background:rgba(224,113,90,.15);
+  color:var(--coral);
+}
+.tag.album{
+  background:rgba(90,167,224,.15);
+  color:var(--blue);
+}
+.tag.milestone{
+  background:rgba(217,162,76,.18);
+  color:var(--gold);
+}
+/* ====================================================== */
+/* BOTÓN / CÍRCULO CENTRAL */
+/* ====================================================== */
+.timeline-dot{
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:28px;
+  height:28px;
+  padding:0;
+  border:0;
+  border-radius:50%;
+  background:var(--dark);
+  cursor:pointer;
+  box-sizing:border-box;
+  transform:translate(-50%,-50%);
+  z-index:5;
+  transition:transform .2s ease,box-shadow .2s ease;
+}
+.timeline-dot img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  border-radius:50%;
+  pointer-events:none;
+}
+/* Conserva el anillo y la posición de los círculos anteriores. */
+.timeline-dot::after{
+  content:"";
+  position:absolute;
+  inset:-10px;
+  border:5px solid rgba(90,167,224,.23);
+  border-radius:50%;
+  transition:border-color .2s ease;
+}
+.timeline-dot:hover{
+  transform:translate(-50%,-50%) scale(1.12);
+}
+.timeline-dot:hover::after{border-color:rgba(90,167,224,.45);}
+.timeline-dot:focus-visible{outline:2px solid var(--cream);outline-offset:12px;}
+.timeline-dot.reproduciendo{box-shadow:0 0 0 8px rgba(90,167,224,.15);}
+/* ====================================================== */
+/* IMÁGENES */
+/* ====================================================== */
+.timeline-media{
+  grid-column:2;
+  /*
+    Tamaño fijo para TODAS las imágenes.
+  */
+  width:320px;
+  height:180px;
+  justify-self:center;
+  /*
+    hidden evita que el contenido de la imagen
+    se salga de las esquinas redondeadas.
+  */
+  overflow:hidden;
+  border-radius:16px;
+  transition:
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+.timeline-media img{
+  width:100%;
+  height:100%;
+  /*
+    contain mantiene visible la imagen completa
+    sin deformarla ni recortarla.
+    Puede dejar espacio libre si la proporción
+    original no coincide con 320x180.
+  */
+  object-fit:contain;
+  display:block;
+  border-radius:16px;
+}
+/* ====================================================== */
+/* HOVER DEL HECHO */
+/* ====================================================== */
+.timeline-item:hover .timeline-content{
+  transform:translateY(-5px);
+  background:rgba(90,167,224,.08);
+  border-color:rgba(90,167,224,.35);
+  box-shadow:0 12px 30px rgba(0,0,0,.18);
+}
+.timeline-item:hover .timeline-media{
+  transform:translateY(-5px);
+  box-shadow:0 12px 30px rgba(0,0,0,.25);
+}

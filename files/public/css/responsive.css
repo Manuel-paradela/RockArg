@@ -1,0 +1,144 @@
+/* Adaptación compartida. Se importa después de los estilos de componentes. */
+main, .hero > *, .slider-ventana { min-width: 0; }
+.search-bar input { min-width: 0; width: 100%; }
+.chips { flex-wrap: wrap; }
+.section-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.section-head h2 { overflow-wrap: anywhere; }
+.historia-titulo { font-size: clamp(30px, 5vw, 42px); margin-bottom: 10px; }
+
+@media (max-width: 1000px) {
+  .topbar { gap: 18px; padding-inline: 24px; }
+  .nav-actions { margin-right: 0; }
+  .nav-links { gap: 22px; }
+  #listaAlbumes.grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; gap: 28px; }
+  .hero-art { width: min(100%, 280px); margin: 0 auto; }
+  .hero h1 { font-size: clamp(36px, 7vw, 56px); }
+}
+
+@media (max-width: 850px) {
+  .timeline::before { left: 18px; }
+  .timeline-item {
+    grid-template-columns: 45px minmax(0, 1fr);
+    column-gap: 12px;
+    min-height: auto;
+    margin-bottom: 40px;
+  }
+  .timeline-content { grid-column: 2; padding: 16px 12px; min-width: 0; }
+  .timeline-content h3 { overflow-wrap: anywhere; }
+  .timeline-dot { left: 18px; top: 30px; }
+  .timeline-media {
+    grid-column: 2;
+    width: min(100%, 320px);
+    height: auto;
+    aspect-ratio: 16 / 9;
+    margin-top: 14px;
+    justify-self: start;
+  }
+}
+
+@media (max-width: 700px) {
+  .topbar { padding: 14px 20px; flex-wrap: wrap; gap: 12px; }
+  .nav-links {
+    order: 3;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px 16px;
+  }
+  .nav-links a { display: inline-flex; align-items: center; min-height: 40px; }
+  .nav-actions { margin-right: 0; margin-left: auto; }
+  main { padding: 32px 20px 64px; }
+  .hero { padding: 20px 0 36px; }
+  .hero .lead { max-width: none; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; }
+  .artist-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  #listaBandas.artist-grid,
+  #listaAlbumes.grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 12px; }
+  /* Controles debajo de la grilla: tarjetas más amplias y botones fáciles de tocar. */
+  .explorar-slider { grid-template-columns: 44px minmax(0, 1fr) 44px; gap: 16px 10px; }
+  .slider-ventana { grid-column: 1 / -1; grid-row: 1; }
+  .slider-flecha { grid-row: 2; width: 44px; height: 44px; }
+  .slider-flecha:first-child { grid-column: 1; }
+  .slider-flecha:last-child { grid-column: 3; }
+  .slider-flecha img { width: 24px; height: 24px; }
+  .chips { margin-block: 18px 24px; }
+  .chip, .hero-actions .btn { min-height: 44px; }
+  .song-row { grid-template-columns: 22px 40px minmax(0, 1fr) 40px 44px; gap: 8px; padding: 10px 6px; }
+  .row-cover { width: 40px; height: 40px; }
+  .boton-reproducir-fila { width: 44px; height: 44px; }
+  .row-time { font-size: 12px; }
+  footer { padding: 24px 20px; gap: 18px; }
+  .foot-links { flex-wrap: wrap; gap: 8px 20px; }
+  .foot-links a { display: inline-flex; align-items: center; min-height: 40px; }
+  .panel-usuario.favoritos-panel {
+    width: min(360px, calc(100vw - 40px));
+    max-height: calc(100vh - 180px);
+    max-height: calc(100dvh - 180px);
+  }
+  .auth-form input, .panel-usuario input, .search-bar input { font-size: 16px; }
+}
+
+@media (max-width: 480px) {
+  .topbar { padding-inline: 16px; }
+  .brand { gap: 7px; }
+  .brand span { font-size: 23px; }
+  .brand img { height: 30px; }
+  .nav-actions, #authLinks { gap: 6px; }
+  .nav-actions .btn { padding: 10px 12px; font-size: 12px; }
+  .nav-links { gap: 4px 12px; }
+  .nav-links a { font-size: 13px; }
+  main { padding: 24px 16px 48px; }
+  .hero h1 { font-size: clamp(34px, 10vw, 46px); }
+  .hero-art { width: min(100%, 230px); }
+  .hero-actions { display: grid; grid-template-columns: 1fr; }
+  .hero-actions > a { display: block; }
+  .hero-actions .btn { width: 100%; }
+  .search-bar { padding: 10px 12px; gap: 8px; }
+  .song-row { grid-template-columns: 36px minmax(0, 1fr) 36px 44px; gap: 7px; padding-inline: 0; }
+  .row-index { display: none; }
+  .row-cover { width: 36px; height: 36px; }
+  .row-title .title { font-size: 13px; }
+  .row-title .sub { font-size: 11px; }
+  .row-time { font-size: 11px; }
+  .artist-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .card p.title, .artist-card .title { overflow-wrap: anywhere; font-size: 13px; }
+  .timeline-content { padding-inline: 4px; }
+  .timeline-content h3 { font-size: 17px; }
+  .timeline-content p { font-size: 13px; }
+  .historia-intro { margin-bottom: 32px; }
+  .player { padding: 24px 20px; }
+  .player-cover { width: min(100%, 190px); }
+  .player-like { top: 12px; right: 12px; }
+  .player-info { padding-top: 32px; }
+  .auth-page .auth-wrap { padding: 24px 16px; }
+  .auth-card { padding: 26px 20px; }
+  .auth-navigation .btn { min-height: 48px; }
+  .panel-usuario.favoritos-panel { width: min(360px, calc(100vw - 32px)); right: 0; }
+  footer { flex-direction: column; align-items: center; text-align: center; }
+  .foot-links { justify-content: center; }
+}
+
+@media (max-width: 360px) {
+  .topbar > .brand { flex: 1 0 100%; justify-content: center; }
+  .nav-actions { width: 100%; justify-content: center; margin: 0; }
+  .panel-usuario.favoritos-panel { right: 50%; transform: translateX(50%); }
+  .nav-links { justify-content: center; }
+  #listaBandas.artist-grid, #listaAlbumes.grid { gap: 14px 10px; }
+}
+
+/* Teléfonos en horizontal o ventanas de poca altura. */
+@media (max-height: 500px) and (max-width: 1000px) {
+  .topbar { position: static; }
+  .panel-usuario.favoritos-panel { max-height: 65vh; max-height: 65dvh; }
+  .auth-page .auth-wrap { padding-block: 24px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-spin { animation: none; }
+  .timeline-content, .timeline-media, .timeline-dot, .ctrl-img { transition: none; }
+}

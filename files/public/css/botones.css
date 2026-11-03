@@ -1,0 +1,18 @@
+.btn{
+  font-size:13px;
+  padding:9px 20px;
+  border-radius:20px;
+  border:1px solid var(--line);
+  background:transparent;
+  color:var(--cream);
+  cursor:pointer;
+  transition:border-color .15s,background .15s,color .15s;
+}
+.btn:hover{border-color:var(--gray);}
+.btn-primary{
+  background:var(--blue);
+  border-color:var(--blue);
+  color:var(--dark);
+  font-weight:600;
+}
+.btn-primary:hover{background:#6cb4e6;}

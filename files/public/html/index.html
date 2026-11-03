@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RockArg — inicio</title>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/iconfont/tabler-icons.min.css">
+</head>
+
+<body>
+
+<!--Barra de navegacion-->
+<header class="topbar">
+  <div class="brand">
+    <img src="/imagenes/logos/isotipo_2.png" alt="RockArg">
+    <span>RockArg</span>
+  </div>
+
+  <nav class="nav-links">
+    <a href="/html/index.html" class="active">Inicio</a>
+    <a href="/html/explorar.html">Explorar</a>
+    <a href="/html/historia.html">Historia</a>
+    <a href="/html/admin.html" id="enlaceAdmin" hidden>Admin</a>
+  </nav>
+
+
+
+<div class="nav-actions">
+  <div id="authLinks">
+    <a href="/html/login.html" class="btn">Iniciar sesión</a>
+    <a href="/html/registro.html" class="btn btn-primary">Registrarse</a>
+  </div>
+
+  <button type="button" id="botonUsuario" class="boton-usuario" aria-label="Abrir perfil y canciones con me gusta" aria-controls="panelUsuario" aria-expanded="false" hidden>
+    <img src="/imagenes/logos/usuario.PNG" alt="Perfil de usuario">
+  </button>
+
+  <div id="panelUsuario" class="panel-usuario favoritos-panel" hidden>
+    <h3>Mi perfil</h3>
+
+    <p>Nombre: <strong id="nombrePerfil"></strong></p>
+    <p>Usuario actual: <span id="usuarioActual"></span></p>
+
+    <section class="favoritos-section" aria-labelledby="tituloFavoritos">
+      <h4 id="tituloFavoritos">Tus me gusta <span id="cantidadFavoritos"></span></h4>
+      <p id="estadoFavoritos" class="favoritos-status" role="status"></p>
+      <ul id="listaFavoritos" class="favoritos-lista"></ul>
+    </section>
+    <form id="formPerfil">
+      <label for="nombreUsuario">Cambiar nombre de usuario</label>
+      <input type="text" id="nombreUsuario" minlength="3" maxlength="20" required>
+      <button type="submit" class="btn btn-primary">Guardar usuario</button>
+      <p id="mensajePerfil" aria-live="polite"></p>
+    </form>
+
+    <button type="button" id="cerrarSesion" class="btn-cerrar-sesion">Cerrar sesión</button>
+  </div>
+</div>
+
+</header>
+
+<main>
+
+<section class="hero">
+  <div>
+    <p class="eyebrow">Biblioteca de rock nacional argentino</p>
+    <h1>Todo el rock que hicimos nuestro.</h1>
+    <p class="lead">RockArg reúne artistas, álbumes, canciones e historia del rock nacional argentino.</p>
+
+    <div class="hero-actions">
+      <a href="/html/explorar.html"><button class="btn btn-primary">Explorar la biblioteca</button></a>
+      <a href="/html/historia.html"><button class="btn">Historia del rock nacional</button></a>
+    </div>
+  </div>
+
+  <div class="hero-art">
+    <img src="" id="heroSpin" class="hero-spin" alt="">
+  </div>
+</section>
+
+<section class="busqueda-principal">
+  <div class="search-bar">
+    <i class="ti ti-search"></i>
+    <input type="text" id="buscadorCanciones" placeholder="Buscar canciones, artistas o álbumes..." autocomplete="off">
+    <button id="limpiarBusqueda" class="clear-search" type="button">
+      <i class="ti ti-x"></i>
+    </button>
+  </div>
+</section>
+
+<section id="seccionResultados" class="search-results" hidden>
+  <div class="section-head">
+    <h2 id="tituloResultados">Resultados</h2>
+    <span id="cantidadResultados" class="link-more"></span>
+  </div>
+
+  <div id="resultadosBusqueda" class="song-list"></div>
+</section>
+
+<section id="panelReproductor" class="player player-compacto" style="display:none;">
+      <button type="button" id="botonMeGusta" class="player-like" aria-label="Dar me gusta" aria-pressed="false" title="Dar me gusta" disabled>
+        <img id="imagenMeGusta" src="/imagenes/logos/sin_me_gusta" alt="" width="26" height="26">
+      </button>
+
+  <div class="player-info">
+    <div class="player-cover">
+      <img id="portadaCancionActual" src="" alt="Portada">
+    </div>
+
+    <div class="meta-text">
+      <p class="song" id="nombreCancionActual"></p>
+      <p class="artist" id="artistaCancionActual"></p>
+    </div>
+  </div>
+
+
+  <div class="progress-track" id="barraProgreso">
+    <div
+      class="progress-fill"
+      id="progresoCancion"
+      style="width:0%;"
+    ></div>
+  </div>
+
+
+  <div class="time-row">
+    <span id="tiempoActual">0:00</span>
+    <span id="tiempoTotal">0:00</span>
+  </div>
+
+
+  <p id="mensajeMeGusta" class="player-like-message" role="status"></p>
+      <a id="loginMeGusta" class="btn player-like-login" href="/html/login.html" hidden>Iniciar sesión</a>
+      <div class="controls">
+    <img
+      src="/imagenes/logos/Play.png"
+      id="botonPlayPausa"
+      class="ctrl-img main"
+      alt="Reproducir"
+    >
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  <div class="brand">
+    <span style="font-size:15px;">RockArg</span>
+  </div>
+
+  <div class="foot-links">
+    <a href="/html/explorar.html">Explorar</a>
+    <a href="/html/historia.html">Historia</a>
+    <a href="/html/login.html">Iniciar sesión</a>
+  </div>
+</footer>
+
+<script type="module" src="/js/main.js"></script>
+<script type="module" src="/js/usuario.js"></script>
+
+</body>
+</html>

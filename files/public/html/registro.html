@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RockArg — registrarse</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.44.0/iconfont/tabler-icons.min.css">
+</head>
+<body class="auth-page">
+<header class="topbar">
+  <a href="/html/index.html" class="brand">
+    <img src="/imagenes/logos/isotipo_2.png" alt="RockArg">
+    <span>RockArg</span>
+  </a>
+  <nav class="nav-links">
+    <a href="/html/index.html">Inicio</a>
+    <a href="/html/explorar.html">Explorar</a>
+    <a href="/html/historia.html">Historia</a>
+  </nav>
+  <div class="nav-actions">
+    <a href="/html/login.html" class="btn">Iniciar sesión</a>
+  </div>
+</header>
+
+<main class="auth-wrap">
+  <section class="auth-card" aria-labelledby="authTitle">
+    <p class="eyebrow">Tu espacio en RockArg</p>
+    <h1 id="authTitle">Creá tu cuenta</h1>
+    <p class="lead">Sumate a RockArg y armá tu biblioteca de rock nacional.</p>
+
+    <form id="formRegistro" class="auth-form">
+      <div class="field">
+        <label for="nombreRegistro">Nombre</label>
+        <input type="text" id="nombreRegistro" name="nombre" placeholder="Ingresá tu nombre" maxlength="50" autocomplete="name" required>
+      </div>
+
+      <div class="field">
+        <label for="usuarioRegistro">Nombre de usuario</label>
+        <input type="text" id="usuarioRegistro" name="usuario" placeholder="Elegí un usuario" minlength="3" maxlength="20" autocomplete="username" required>
+        <small>Usá letras, números, puntos, guiones o guiones bajos.</small>
+      </div>
+
+      <div class="field">
+        <label for="contrasenaRegistro">Contraseña</label>
+        <input type="password" id="contrasenaRegistro" name="contraseña" placeholder="Elegí una contraseña" minlength="4" maxlength="128" autocomplete="new-password" required>
+      </div>
+
+      <button type="submit" class="btn btn-primary auth-submit">Registrarse</button>
+      <p id="mensajeRegistro" class="mensaje-auth" aria-live="polite"></p>
+    </form>
+
+    <div class="auth-navigation">
+      <p>¿Ya tenés una cuenta?</p>
+      <a href="/html/login.html" class="btn auth-secondary">Iniciar sesión</a>
+      <a href="/html/index.html" class="btn auth-back"><span aria-hidden="true">←</span> Volver al inicio</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <a href="/html/index.html" class="brand">
+    <img src="/imagenes/logos/isotipo_2.png" alt="RockArg">
+    <span style="font-size:15px;">RockArg</span>
+  </a>
+  <div class="foot-links">
+    <a href="/html/explorar.html">Explorar</a>
+    <a href="/html/historia.html">Historia</a>
+    <a href="/html/login.html">Iniciar sesión</a>
+  </div>
+</footer>
+
+<script type="module" src="/js/usuario.js"></script>
+</body>
+</html>

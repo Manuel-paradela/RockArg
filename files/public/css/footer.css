@@ -1,0 +1,18 @@
+/* ====================================================== */
+/* FOOTER */
+/* ====================================================== */
+footer{
+  border-top:1px solid var(--line);
+  padding:26px 40px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:14px;
+  color:var(--gray);
+  font-size:12px;
+}
+footer .brand{color:var(--cream);}
+.foot-links{display:flex;gap:22px;}
+.foot-links a{color:var(--gray);}
+.foot-links a:hover{color:var(--cream);}

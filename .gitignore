@@ -1,0 +1,26 @@
+# Dependencias instaladas en cada equipo
+node_modules/
+
+# Bases y copias locales; la entrega usa crear_bdd.py
+*.db
+*.db-*
+*.sqlite
+*.sqlite3
+backups/
+
+# Configuración privada
+.env
+.env.*
+!.env.example
+
+# Archivos temporales y del sistema
+__pycache__/
+*.pyc
+.venv/
+venv/
+Thumbs.db
+desktop.ini
+.DS_Store
+*.log
+.validacion*
+.verificacion*

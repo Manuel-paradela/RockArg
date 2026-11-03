@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&display=swap');
+@import url("./base.css");
+@import url("./navbar.css");
+@import url("./botones.css");
+@import url("./index.css");
+@import url("./tarjetas.css");
+@import url("./reproductor.css");
+@import url("./explorar.css");
+@import url("./canciones.css");
+@import url("./artistas.css");
+@import url("./historia.css");
+@import url("./footer.css");
+@import url("./usuario.css");
+@import url("./auth.css");
+@import url("./responsive.css");
+/*
+base.css: variables, tipografías generales y layout.
+navbar.css: barra de navegación y marca.
+botones.css: botones compartidos.
+index.css: hero y animación de inicio.
+tarjetas.css: grilla y tarjetas de portadas.
+reproductor.css: reproductor y controles.
+explorar.css: buscador y filtros.
+canciones.css: listado de canciones.
+artistas.css: grilla y avatares.
+historia.css: introducción, línea de tiempo y etiquetas.
+footer.css: pie de página.
+usuario.css: autenticación, ambas variantes de perfil y ajustes asociados.
+responsive.css: todas las media queries, en el orden original.
+*/

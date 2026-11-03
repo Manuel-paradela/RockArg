@@ -1,0 +1,65 @@
+/* ====================================================== */
+/* CARDS */
+/* ====================================================== */
+.grid{
+  /*
+    repeat(auto-fill,...) genera automáticamente tantas
+    columnas como entren en el espacio disponible.
+    minmax(170px,1fr) impide que cada tarjeta tenga menos
+    de 170px y permite que crezca para llenar la fila.
+  */
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
+  gap:20px;
+}
+.card{cursor:pointer;}
+.cover{
+  position:relative;
+  aspect-ratio:1;
+  background:var(--navy);
+  border-radius:8px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--line);
+  /*
+    Evita que una imagen ampliada o cualquier contenido
+    sobresalga de los bordes redondeados.
+  */
+  overflow:hidden;
+}
+.cover img{
+  width:100%;
+  height:100%;
+  /*
+    cover llena completamente el cuadrado manteniendo
+    la proporción de la foto. Puede recortar los bordes.
+  */
+  object-fit:cover;
+  display:block;
+}
+.play-overlay{
+  /*
+    inset:0 equivale a top/right/bottom/left:0.
+    Hace que el overlay cubra exactamente toda la portada.
+  */
+  position:absolute;
+  inset:0;
+  background:rgba(21,21,27,.55);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  opacity:0;
+  transition:opacity .15s;
+}
+.card:hover .play-overlay{opacity:1;}
+.card p.title{
+  font-size:14px;
+  margin:10px 0 0;
+  color:var(--cream);
+}
+.card p.sub{
+  font-size:12px;
+  margin:3px 0 0;
+  color:var(--gray);
+}

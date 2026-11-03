@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Administración - RockArg</title>
+  <link rel="stylesheet" href="/css/admin.css">
+  <script type="module" src="/js/admin.js"></script>
+</head>
+<body>
+  <header>
+    <h1>RockArg</h1>
+    <p>Panel de administración</p>
+  </header>
+
+  <main>
+    <p id="mensajePrincipal">Verificando permisos...</p>
+
+    <section id="panelAdmin" hidden>
+      <div class="panel">
+        <label for="tipoEntidad">¿Qué querés administrar?</label>
+        <select id="tipoEntidad">
+          <option value="canciones">Canciones</option>
+          <option value="discos">Álbumes</option>
+          <option value="bandas">Bandas y artistas</option>
+        </select>
+
+        <div class="acciones">
+          <button type="button" id="btnAgregar" class="agregar">
+            Agregar
+          </button>
+          <button type="button" id="btnModificar" class="modificar">
+            Modificar
+          </button>
+          <button type="button" id="btnBorrar" class="borrar">
+            Borrar
+          </button>
+        </div>
+      </div>
+
+      <section class="panel permisos-panel" aria-labelledby="tituloAdministradores">
+        <h2 id="tituloAdministradores">Usuarios administradores</h2>
+        <p>Otorgá acceso al panel de administración a una cuenta registrada.</p>
+        <button type="button" id="btnAbrirAdministradores" class="modificar"
+          aria-expanded="false" aria-controls="formAdministrador">Agregar usuario administrador</button>
+        <form id="formAdministrador" hidden>
+          <label for="usuarioAdministrador">Seleccioná un usuario</label>
+          <select id="usuarioAdministrador" name="idUsuario" required disabled>
+            <option value="">Seleccioná un usuario</option>
+          </select>
+          <button type="submit" id="btnGuardarAdministrador" class="agregar" disabled>Agregar administrador</button>
+        </form>
+        <p id="mensajeAdministrador" class="mensaje" role="status"></p>
+      </section>
+
+      <section id="formularioAdmin" class="panel" hidden></section>
+
+      <a class="volver" href="/html/index.html">Volver a RockArg</a>
+    </section>
+  </main>
+</body>
+</html>
