@@ -28,6 +28,28 @@ https://docs.npmjs.com/downloading-and-installing-node-js-and-npm/
 Python para Windows:
 https://www.python.org/downloads/windows/
 
+Herramientas de compilación de C++ para Windows (si npm las solicita):
+https://visualstudio.microsoft.com/visual-cpp-build-tools/
+
+En el instalador de Visual Studio Build Tools, seleccionar la carga
+"Desarrollo para el escritorio con C++" (Desktop development with C++),
+incluyendo MSVC y Windows SDK. No hace falta instalar el editor completo.
+La prueba de npm ci en Windows con Node.js 24.22.1 y better-sqlite3
+13.0.3 intentó compilar el módulo y requirió Python y estas herramientas.
+
+Documentación de los requisitos de node-gyp en Windows:
+https://github.com/nodejs/node-gyp#on-windows
+
+Aplicación opcional para abrir y revisar la base de datos:
+DB Browser for SQLite:
+https://sqlitebrowser.org/dl/
+
+Descargar el instalador correspondiente al equipo (habitualmente Windows
+de 64 bits). Después de ejecutar crear_bdd.py, abrir DB Browser, elegir
+"Abrir base de datos" y seleccionar Canciones.db en la raíz del proyecto.
+DB Browser sirve para consultar tablas y ejecutar SQL manualmente; no es
+necesario para que la página funcione y no reemplaza better-sqlite3.
+
 Seleccionar los instaladores correspondientes a la arquitectura del
 equipo. Mantener las opciones para agregar las herramientas al PATH.
 Si se usa el instalador tradicional de Python, seleccionar Add Python
@@ -65,6 +87,12 @@ versiones fijadas. La carpeta node_modules no se incluye en GitHub:
 se genera en cada equipo con npm. No instalarla desde otro sitio.
 
 Si PowerShell bloquea npm.ps1, usar CMD o ejecutar npm.cmd ci.
+
+Si aparece "Could not find any Python installation", instalar Python
+y reabrir la terminal. Si aparece "Could not find any Visual Studio
+installation to use" o "gyp ERR! find VS", instalar las herramientas
+de C++ indicadas en el paso 2, reabrir la terminal y repetir npm ci.
+No continuar con npm start mientras npm ci termine con errores.
 
 Paquetes declarados en el proyecto:
 - express 5.3.0: servidor HTTP y rutas.
