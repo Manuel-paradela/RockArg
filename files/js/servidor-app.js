@@ -1,6 +1,5 @@
 // Configuración, conexión SQLite y archivos públicos del servidor.
 const express = require("express");
-const cors = require("cors");
 const path = require("path");
 const Database = require("better-sqlite3");
 const { registrarRutas } = require("./servidor-rutas.js");
@@ -82,7 +81,6 @@ function crearServidor(opciones = {}) {
   try {
     prepararUsuarios(db);
     const app = express();
-    app.use(cors());
     // Se registra antes de las rutas para que los formularios JSON estén en req.body.
     app.use(express.json());
     configurarArchivos(app, config);
